@@ -19,8 +19,10 @@ end
 
 _G.class = require("libs.class")
 _G.Vector = require("src.Vector")
+_G.SpriteAnimation = require("src.SpriteAnimation")
 _G.Container = require("src.Container")
 _G.Sprite = require("src.Sprite")
+
 -- LOCAL DEBUG TOOLS
 local lurker = require "libs.debug.lurker"
 
@@ -33,6 +35,10 @@ sti = require "libs.sti.sti"
 Moan = require "libs.Moan.Moan"
 require "map"
 
+local gameContainer = Container()
+local player = Sprite(love.graphics.newImage("assets/gfx/characters/character1.png"))
+_G.gameContainer = gameContainer
+
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
     Moan.selectButton = "z"
@@ -41,17 +47,39 @@ function love.load()
     mapafile = "assets/maps/prueba.lua"
     playerspawn = "player"
     loadMap(mapafile)
-
     fastmove = 1
+
+    gameContainer.debug = true
+    player.debug = true
+    player:addAnimation(
+        SpriteAnimation {
+            spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
+            width = 14,
+            height = 21
+        },
+        "front"
+    )
+
+    player:addAnimation(
+        SpriteAnimation {
+            spriteSheet = love.graphics.newImage("assets/gfx/characters/character2.png"),
+            width = 14,
+            height = 21
+        },
+        "back"
+    )
+    player.currentAnimation = "back"
+    gameContainer:addChild(player)
 end
 
 function love.update(delta)
     updateMap(delta)
     Moan.update(delta)
     lurker.update()
+    gameContainer:update(delta)
 end
 
-function love.draw()
+function love.draw(dt)
     if not layer then
         return
     end
@@ -63,6 +91,7 @@ function love.draw()
 
     drawMap()
 
+    gameContainer:draw(dt)
     Moan.draw()
     love.graphics.setColor(0, 0, 0)
     love.graphics.print("Current  FPS: " .. tostring(love.timer.getFPS()), 20, 30)
