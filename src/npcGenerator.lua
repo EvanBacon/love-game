@@ -10,7 +10,7 @@ function generateObject(layer, nombre, tipo, tabla)
         height = nombre.height
     }
 
-    layer.nombre.body = love.physics.newBody(world, layer.nombre.x + 10, layer.nombre.y + 15, "static")
+    layer.nombre.body = love.physics.newBody(game.world, layer.nombre.x + 10, layer.nombre.y + 15, "static")
     layer.nombre.body:setLinearDamping(12)
     layer.nombre.body:setFixedRotation(true)
     layer.nombre.shape = love.physics.newRectangleShape(15, 10)

@@ -22,7 +22,7 @@ function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadesti
             )
      then
         _G.newMapa = destinofile
-        playerspawn = positionDestino
+        playerSpawnObject = positionDestino
         if miradadestino == nil then
             herofacing = "down"
         else

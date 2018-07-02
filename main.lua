@@ -1,25 +1,11 @@
-debugging = true
+local love = love
 
-function removeItemFromTable(t, item)
-    local index = indexOf(t, item)
-    t[index] = nifVectorl
-end
-function indexOf(t, object)
-    if "table" == type(t) then
-        for i = 1, #t do
-            if object == t[i] then
-                return i
-            end
-        end
-        return -1
-    else
-        error("table.indexOf expects table for first argument, " .. type(t) .. " given")
-    end
-end
+debugging = true
 
 _G.class = require("libs.class")
 _G.Vector = require("src.Vector")
 _G.SpriteAnimation = require("src.SpriteAnimation")
+_G.Game = require("src.Game")
 _G.Container = require("src.Container")
 _G.Sprite = require("src.Sprite")
 
@@ -32,20 +18,17 @@ sti = require "libs.sti.sti"
 Moan = require "libs.Moan.Moan"
 require "map"
 
-local gameContainer = Container()
 -- local player = Sprite(love.graphics.newImage("assets/gfx/characters/character1.png"))
-_G.gameContainer = gameContainer
+game = Game()
 
 _G.drawMapStuff = true
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
     Moan.selectButton = "z"
-    fuenteTexto = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
-    Moan.font = fuenteTexto
-    mapafile = "assets/maps/prueba.lua"
-    playerspawn = "player"
-    loadMap(mapafile)
-    fastmove = 1
+    -- Moan.font = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
+    currentMap = "assets/maps/prueba.lua"
+    playerSpawnObject = "player"
+    loadMap(currentMap)
 end
 
 function love.update(delta)
@@ -53,7 +36,10 @@ function love.update(delta)
     if drawMapStuff then
         Moan.update(delta)
     end
-    gameContainer:update(delta)
+
+    if game then
+        game:update(delta)
+    end
 end
 
 function drawDebugData()
@@ -67,18 +53,18 @@ function love.draw(dt)
     if not layer then
         return
     end
-    if (Moan.showingMessage) then
-        action = true
-    else
-        action = false
-    end
+    action = Moan.showingMessage
 
     if drawMapStuff then
         drawMap()
-        Moan.draw()
     end
 
-    gameContainer:fullDraw(dt)
+    if game then
+        game:draw(dt)
+    end
+
+    Moan.draw()
+
     drawDebugData()
 end
 
@@ -95,11 +81,7 @@ end
 
 function love.keyreleased(key, key, isrepeat)
     if key == "z" then
-        if action then
-            action = false
-        else
-            action = true
-        end
+        action = not action
     end
     Moan.keyreleased(key)
 end

@@ -1,3 +1,21 @@
+function removeItemFromTable(t, item)
+    local index = indexOf(t, item)
+    t[index] = nifVectorl
+end
+
+function indexOf(t, object)
+    if "table" == type(t) then
+        for i = 1, #t do
+            if object == t[i] then
+                return i
+            end
+        end
+        return -1
+    else
+        error("table.indexOf expects table for first argument, " .. type(t) .. " given")
+    end
+end
+
 local love = _G.love
 local Vector = _G.Vector
 local class = _G.class

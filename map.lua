@@ -16,16 +16,15 @@ function drawMap()
     Mapdraw()
 end
 
-function loadMap(mapafile)
-    love.filesystem.load(mapafile)()
+function loadMap(currentMap)
+    love.filesystem.load(currentMap)()
     love.filesystem.load("src/npcGenerator.lua")
     --update mapa
-    newMapa = mapafile
-    mapa = mapafile
+    newMapa = currentMap
+    mapa = currentMap
 
     --create map
     map = sti((path), {"box2d"})
-    world = love.physics.newWorld(0, 0)
 
     layernpc = map.layers["npc"]
 
@@ -41,26 +40,25 @@ function loadMap(mapafile)
 
     --load map and boxes
     Mapload()
-    map:box2d_init(world)
+    map:box2d_init(game.world)
 
     screen_width = love.graphics.getWidth() / scale
     screen_height = love.graphics.getHeight() / scale
 
     --hero
-    fastmove = 0.4
     if herofacing == nil then
         herofacing = "down"
     end
     xt, yt = 0, 0
 
-    playerspawn = getObj(playerspawn)
+    playerSpawnObject = getObj(playerSpawnObject)
 
     --heroes images
     local player =
         Sprite {
         width = 14,
         height = 21,
-        position = Vector(playerspawn.x, playerspawn.y)
+        position = Vector(playerSpawnObject.x, playerSpawnObject.y)
     }
     player.debug = true
 
@@ -90,9 +88,9 @@ function loadMap(mapafile)
     )
     player.currentAnimation = "top"
 
-    gameContainer:addChild(player)
+    game.scene:addChild(player)
     --physics
-    player:setWorld(world, "dynamic")
+    player:enablePhysics("dynamic")
     player.body:setLinearDamping(12)
     player.body:setFixedRotation(true)
 
@@ -143,7 +141,7 @@ function updateMap(delta)
         return
     end
     Mapupdate(delta)
-    world:update(delta)
+    game.world:update(delta)
 
     if love.keyboard.isDown("x") then
         speed = 15000

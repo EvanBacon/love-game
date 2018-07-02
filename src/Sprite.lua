@@ -27,6 +27,10 @@ function Sprite:addAnimation(animation, key)
     self.animations[key or #self.animations + 1] = animation
 end
 
+function Sprite:enablePhysics(type)
+    self:setWorld(game.world, type)
+end
+
 function Sprite:setWorld(world, type)
     self.world = world
     local absolutePosition = self:getAbsolutePosition()
