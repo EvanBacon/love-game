@@ -1,6 +1,5 @@
 require "controls"
 require "libs.boundingball"
-local generateNPC = require("src.npcGenerator")
 
 local newAnimation = require "src.newAnimation"
 
@@ -165,10 +164,10 @@ function updateMap(delta)
     end
 end
 
-function drawnpcs(npcs)
+function drawObjects(npcs)
     function layernpc:draw()
         for k, nombre in pairs(npcs) do
-            drawNPC(nombre)
+            drawObject(nombre)
         end
     end
 end

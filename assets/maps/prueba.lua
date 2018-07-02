@@ -1,5 +1,5 @@
 require "src.maphelper"
-local generateNPC = require("src.npcGenerator")
+require("src.npcGenerator")
 local love = _G.love
 path = "assets/maps/tiledmaps/prueba.lua"
 
@@ -13,9 +13,10 @@ function Mapload()
     cave = getObj("cave")
     --npcs
     npcs = {}
-    sven = generateNPC("sven", "boykid", npcs)
-    manuel = generateNPC("manuel", "boykid", npcs)
-    drawnpcs(npcs)
+    sven = generateObject(layernpc, "sven", "boykid", npcs)
+    manuel = generateObject(layernpc, "manuel", "boykid", npcs)
+
+    drawObjects(npcs)
 end
 function Mapdraw()
 end
