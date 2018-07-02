@@ -4,17 +4,26 @@ local class = _G.class
 
 local Container =
     class {
-    constructor = function(self)
+    constructor = function(self, props)
+        props = props or {}
+        self.width = props.width or 0
+        self.height = props.height or 0
+        self.position = props.position or Vector()
     end,
     children = {},
-    position = Vector(),
     scale = Vector(1, 1),
-    width = 50,
-    height = 50,
     rotation = 0,
     flipH = false,
     flipV = false
 }
+
+function Container:getAbsolutePosition()
+    if self.parent then
+        return self.parent:getAbsolutePosition() + self.position
+    else
+        return self.position
+    end
+end
 
 function Container:preDraw(dt)
     love.graphics.push() -- stores the default coordinate system
@@ -71,10 +80,12 @@ function Container:update(dt)
 end
 
 function Container:addChild(child)
+    child.parent = self
     self.children[#self.children + 1] = child
 end
 
 function Container:removeChild(child)
+    child.parent = nil
     return removeItemFromTable(self.children, child)
 end
 

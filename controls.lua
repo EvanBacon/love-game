@@ -34,11 +34,8 @@ function controls(x, y, speed, delta)
             x = (xt - love.graphics.getWidth() / 2)
             y = (yt - love.graphics.getHeight() / 2)
             layer.hero.moving = true
-            if x < 0 then
-                layer.hero.flipH = true
-            else
-                layer.hero.flipH = false
-            end
+            layer.hero.flipH = x < 0
+
             if math.abs(x) < 50 then
                 if y > 0 then
                     herofacing = "down"

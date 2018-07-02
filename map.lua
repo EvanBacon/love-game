@@ -53,8 +53,17 @@ function loadMap(mapafile)
     end
     xt, yt = 0, 0
 
+    playerspawn = getObj(playerspawn)
+
     --heroes images
-    player = Sprite()
+    local player =
+        Sprite {
+        width = 14,
+        height = 21,
+        position = Vector(playerspawn.x, playerspawn.y)
+    }
+    player.debug = true
+
     player:addAnimation(
         SpriteAnimation {
             spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
@@ -82,30 +91,20 @@ function loadMap(mapafile)
     player.currentAnimation = "top"
 
     gameContainer:addChild(player)
-    --spawn
-    playerspawn = getObj(playerspawn)
-
-    player.debug = true
-
-    player.moving = false
-    player.position.x = playerspawn.x
-    player.position.y = playerspawn.y
-    player.width = 14
-    player.height = 21
-
-    --hero position definition
-    layer.hero = player
     --physics
-    tx = math.floor(layer.hero.position.x - screen_width / 2)
-    ty = math.floor(layer.hero.position.y - screen_height / 2)
-    layer.hero.body = love.physics.newBody(world, layer.hero.position.x + 6, layer.hero.position.y + 15, "dynamic")
-    layer.hero.body:setLinearDamping(12)
-    layer.hero.body:setFixedRotation(true)
-    layer.hero.shape = love.physics.newRectangleShape(13, 13)
-    layer.hero.fixture = love.physics.newFixture(layer.hero.body, layer.hero.shape)
+    player:setWorld(world, "dynamic")
+    player.body:setLinearDamping(12)
+    player.body:setFixedRotation(true)
+
+    layer.hero = player
 
     --when changing map, we can move by default
     allowMove = true
+    doMusicStuff()
+    doGameDayCycleStuff()
+end
+
+function doMusicStuff()
     --override layer:draw
     love.filesystem.load("src/playerlayerdraw.lua")()
 
@@ -123,6 +122,9 @@ function loadMap(mapafile)
             musicplayer:stop()
         end
     end
+end
+
+function doGameDayCycleStuff()
     --DAYNIGHT SYSTEM
     time = os.date("*t")
     if time.hour > 19 or time.hour < 6 then
@@ -143,27 +145,18 @@ function updateMap(delta)
     Mapupdate(delta)
     world:update(delta)
 
-    --defining sprite's position of the player
-    local sprite = map.layers["sprites"].hero
-
-    --running in the 90s
     if love.keyboard.isDown("x") then
         speed = 15000
     else
         speed = 7500
     end
     speed = speed * delta
-    x, y = 0, 0
 
-    x, y = controls(x, y, speed, delta)
+    local x, y = controls(0, 0, speed, delta)
     layer.hero.body:applyForce(x, y)
 
-    sprite.x, sprite.y = sprite.body:getPosition()
-    -- sprite.x = sprite.x - 6
-    -- sprite.y = sprite.y - 14
-
-    tx = math.floor(layer.hero.x - screen_width / 2)
-    ty = math.floor(layer.hero.y - screen_height / 2)
+    tx = math.floor(layer.hero.position.x - screen_width / 2)
+    ty = math.floor(layer.hero.position.y - screen_height / 2)
 
     map:update(delta)
 

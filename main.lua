@@ -39,15 +39,13 @@ _G.gameContainer = gameContainer
 _G.drawMapStuff = true
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
-    if drawMapStuff then
-        Moan.selectButton = "z"
-        fuenteTexto = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
-        Moan.font = fuenteTexto
-        mapafile = "assets/maps/prueba.lua"
-        playerspawn = "player"
-        loadMap(mapafile)
-        fastmove = 1
-    end
+    Moan.selectButton = "z"
+    fuenteTexto = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
+    Moan.font = fuenteTexto
+    mapafile = "assets/maps/prueba.lua"
+    playerspawn = "player"
+    loadMap(mapafile)
+    fastmove = 1
 end
 
 function love.update(delta)
@@ -56,6 +54,13 @@ function love.update(delta)
         Moan.update(delta)
     end
     gameContainer:update(delta)
+end
+
+function drawDebugData()
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.print("Current  FPS: " .. tostring(love.timer.getFPS()), 20, 30)
+    love.graphics.print(layer.hero.position:__tostring(), 20, 50)
+    love.graphics.setColor(255, 255, 255)
 end
 
 function love.draw(dt)
@@ -68,14 +73,13 @@ function love.draw(dt)
         action = false
     end
 
-    drawMap()
+    if drawMapStuff then
+        drawMap()
+        Moan.draw()
+    end
 
     gameContainer:fullDraw(dt)
-    Moan.draw()
-    love.graphics.setColor(0, 0, 0)
-    love.graphics.print("Current  FPS: " .. tostring(love.timer.getFPS()), 20, 30)
-    love.graphics.print(tostring(layer.hero.x) .. " " .. tostring(layer.hero.y), 20, 50)
-    love.graphics.setColor(255, 255, 255)
+    drawDebugData()
 end
 
 function getObj(entity)

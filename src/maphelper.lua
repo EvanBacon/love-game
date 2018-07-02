@@ -11,8 +11,8 @@ function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadesti
     if
         action and herofacing == mirada and
             CheckCollision(
-                layer.hero.x,
-                layer.hero.y,
+                layer.hero.position.x,
+                layer.hero.position.y,
                 herodx,
                 herody,
                 nombrewarp.x,
@@ -32,9 +32,27 @@ function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadesti
 end
 function canispeaktothesign(facing, signObj)
     return action and not Moan.showingMessage and facing == herofacing and
-        CheckCollision(layer.hero.x, layer.hero.y, herodx, herody, signObj.x, signObj.y, signObj.width, signObj.height)
+        CheckCollision(
+            layer.hero.position.x,
+            layer.hero.position.y,
+            herodx,
+            herody,
+            signObj.x,
+            signObj.y,
+            signObj.width,
+            signObj.height
+        )
 end
 function canispeaktothenpc(npc)
     return action and not Moan.showingMessage and
-        CheckCollision(layer.hero.x, layer.hero.y, herodx, herody, npc.x, npc.y, npc.width, npc.height)
+        CheckCollision(
+            layer.hero.position.x,
+            layer.hero.position.y,
+            herodx,
+            herody,
+            npc.x,
+            npc.y,
+            npc.width,
+            npc.height
+        )
 end
