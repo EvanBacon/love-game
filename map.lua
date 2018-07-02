@@ -1,8 +1,13 @@
 require "controls"
 require "libs.boundingball"
 
+local love = _G.love
+
 local newAnimation = require "src.newAnimation"
 
+local tx
+local ty
+local scale
 function drawMap()
     if not map then
         return
@@ -49,34 +54,51 @@ function loadMap(mapafile)
     xt, yt = 0, 0
 
     --heroes images
-    heroImage = love.graphics.newImage("assets/gfx/characters/character1.png")
-    heroImageTop = love.graphics.newImage("assets/gfx/characters/character2.png")
-    heroImageBot = love.graphics.newImage("assets/gfx/characters/character3.png")
-    herodx = 14
-    herody = 21
-    heroAnimation = newAnimation(heroImage, herodx, herody, 1)
-    heroTopAnimation = newAnimation(heroImageTop, herodx, herody, 1)
-    heroBotAnimation = newAnimation(heroImageBot, herodx + 1, herody, 1)
-    heroAnimationRun = newAnimation(heroImage, herodx, herody, fastmove)
-    heroTopAnimationRun = newAnimation(heroImageTop, herodx, herody, fastmove)
-    heroBotAnimationRun = newAnimation(heroImageBot, herodx + 1, herody, fastmove)
+    player = Sprite()
+    player:addAnimation(
+        SpriteAnimation {
+            spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
+            width = 14,
+            height = 21
+        },
+        "side"
+    )
+    player:addAnimation(
+        SpriteAnimation {
+            spriteSheet = love.graphics.newImage("assets/gfx/characters/character2.png"),
+            width = 14,
+            height = 21
+        },
+        "top"
+    )
+    player:addAnimation(
+        SpriteAnimation {
+            spriteSheet = love.graphics.newImage("assets/gfx/characters/character3.png"),
+            width = 14 + 1,
+            height = 21
+        },
+        "bottom"
+    )
+    player.currentAnimation = "top"
 
+    gameContainer:addChild(player)
     --spawn
     playerspawn = getObj(playerspawn)
 
+    player.debug = true
+
+    player.moving = false
+    player.position.x = playerspawn.x
+    player.position.y = playerspawn.y
+    player.width = 14
+    player.height = 21
+
     --hero position definition
-    layer.hero = {
-        x = playerspawn.x,
-        y = playerspawn.y,
-        moving = false,
-        escala = 1,
-        offset = 0
-    }
-    player = layer.hero --alias
+    layer.hero = player
     --physics
-    tx = math.floor(layer.hero.x - screen_width / 2)
-    ty = math.floor(layer.hero.y - screen_height / 2)
-    layer.hero.body = love.physics.newBody(world, layer.hero.x + 6, layer.hero.y + 15, "dynamic")
+    tx = math.floor(layer.hero.position.x - screen_width / 2)
+    ty = math.floor(layer.hero.position.y - screen_height / 2)
+    layer.hero.body = love.physics.newBody(world, layer.hero.position.x + 6, layer.hero.position.y + 15, "dynamic")
     layer.hero.body:setLinearDamping(12)
     layer.hero.body:setFixedRotation(true)
     layer.hero.shape = love.physics.newRectangleShape(13, 13)
@@ -132,33 +154,19 @@ function updateMap(delta)
     end
     speed = speed * delta
     x, y = 0, 0
-    --player movement
-    heroAnimation.currentTime = heroAnimation.currentTime + delta
-    if heroAnimation.currentTime >= heroAnimation.duration then
-        heroAnimation.currentTime = heroAnimation.currentTime - heroAnimation.duration
-    end
-    heroAnimationRun.currentTime = heroAnimationRun.currentTime + delta
-    if heroAnimationRun.currentTime >= heroAnimationRun.duration then
-        heroAnimationRun.currentTime = heroAnimationRun.currentTime - heroAnimationRun.duration
-    end
 
-    --movement applying forces
     x, y = controls(x, y, speed, delta)
     layer.hero.body:applyForce(x, y)
 
-    --fixing player position
     sprite.x, sprite.y = sprite.body:getPosition()
-    sprite.x = sprite.x - 6
-    sprite.y = sprite.y - 14
+    -- sprite.x = sprite.x - 6
+    -- sprite.y = sprite.y - 14
 
-    --update shiftment
     tx = math.floor(layer.hero.x - screen_width / 2)
     ty = math.floor(layer.hero.y - screen_height / 2)
 
-    --map update
     map:update(delta)
 
-    --comprobacion si hay nuevo mapa cargado
     if (newMapa ~= mapa) then
         loadMap(newMapa)
     end

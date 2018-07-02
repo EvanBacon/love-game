@@ -21,10 +21,10 @@ end
 function Mapdraw()
 end
 function Mapupdate(delta)
-    --function changemapa(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
-    changemapa("top", casita, "assets/maps/casita.lua", "warp")
-    changemapa("top", casi2, "assets/maps/casi2.lua", "prueba", "top")
-    changemapa("top", cave, "assets/maps/cave.lua", "prueba", "top")
+    --function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
+    changeMap("top", casita, "assets/maps/casita.lua", "warp")
+    changeMap("top", casi2, "assets/maps/casi2.lua", "prueba", "top")
+    changeMap("top", cave, "assets/maps/cave.lua", "prueba", "top")
     if canispeaktothesign("top", poster1) then
         allowMove = false --lockall
         avatarmoan = love.graphics.newImage("assets/gfx/imagesmoan/wallSign.png")

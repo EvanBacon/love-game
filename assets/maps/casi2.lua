@@ -9,5 +9,5 @@ end
 function Mapdraw()
 end
 function Mapupdate(delta)
-    changemapa("down", map, "assets/maps/prueba.lua", "casi2")
+    changeMap("down", map, "assets/maps/prueba.lua", "casi2")
 end

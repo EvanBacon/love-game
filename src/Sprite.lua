@@ -10,7 +10,8 @@ local Sprite =
         self.image = image
     end,
     animations = {},
-    currentAnimation = nil
+    currentAnimation = nil,
+    moving = false
 }
 
 function Sprite:addAnimation(animation, key)
@@ -26,17 +27,13 @@ end
 
 function Sprite:update(dt)
     Container.draw(self, dt)
-    -- maybe just update one animation
-    for _, animation in pairs(self.animations) do
-        animation:update(dt)
-    end
-    if self.body then
-        self.position.x = self.body:getX()
-        self.position.y = self.body:getY()
+    if self.moving then
+        -- maybe just update one animation
+        for _, animation in pairs(self.animations) do
+            animation:update(dt)
+        end
     end
 end
-
-require("table")
 
 function Sprite:getCurrentAnimation()
     if self.currentAnimation and self.animations[self.currentAnimation] then
@@ -50,28 +47,13 @@ function Sprite:draw(dt)
     local animation = self:getCurrentAnimation()
     if animation then
         local quad = animation:getQuad()
-        love.graphics.draw(
-            animation.spriteSheet,
-            quad,
-            self.position.x,
-            self.position.y,
-            self.rotation,
-            self.scale.x,
-            self.scale.y,
-            self.anchor.x,
-            self.anchor.y
-        )
+        if quad then
+            love.graphics.draw(animation.spriteSheet, quad, 0, 0, self.rotation, 1, 1, 0, 0)
+        else
+            assert("Sprite: Error: quad isn't valid")
+        end
     elseif self.image then
-        love.graphics.draw(
-            self.image,
-            self.position.x,
-            self.position.y,
-            self.rotation,
-            self.scale.x,
-            self.scale.y,
-            self.anchor.x,
-            self.anchor.y
-        )
+        love.graphics.draw(self.image, 0, 0, self.rotation, 1, 1, 0, 0)
     end
 end
 

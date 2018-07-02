@@ -3,14 +3,12 @@ function controls(x, y, speed, delta)
         if not tactil then
             if love.keyboard.isDown("right") then
                 layer.hero.moving = true
-                layer.hero.escala = 1
-                layer.hero.offset = 0
+                layer.hero.flipH = false
                 x = x + speed
             elseif love.keyboard.isDown("left") then
                 x = x - speed
                 layer.hero.moving = true
-                layer.hero.escala = -1
-                layer.hero.offset = 12
+                layer.hero.flipH = true
             end
             if love.keyboard.isDown("down") then
                 layer.hero.moving = true
@@ -37,11 +35,9 @@ function controls(x, y, speed, delta)
             y = (yt - love.graphics.getHeight() / 2)
             layer.hero.moving = true
             if x < 0 then
-                layer.hero.escala = -1
-                layer.hero.offset = 12
+                layer.hero.flipH = true
             else
-                layer.hero.escala = 1
-                layer.hero.offset = 0
+                layer.hero.flipH = false
             end
             if math.abs(x) < 50 then
                 if y > 0 then

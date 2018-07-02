@@ -23,9 +23,6 @@ _G.SpriteAnimation = require("src.SpriteAnimation")
 _G.Container = require("src.Container")
 _G.Sprite = require("src.Sprite")
 
--- LOCAL DEBUG TOOLS
-local lurker = require "libs.debug.lurker"
-
 -- GLOBAL DEBUG TOOLS
 log = require "libs.debug.log"
 inspect = require "libs.debug.inspect"
@@ -36,46 +33,28 @@ Moan = require "libs.Moan.Moan"
 require "map"
 
 local gameContainer = Container()
-local player = Sprite(love.graphics.newImage("assets/gfx/characters/character1.png"))
+-- local player = Sprite(love.graphics.newImage("assets/gfx/characters/character1.png"))
 _G.gameContainer = gameContainer
 
+_G.drawMapStuff = true
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
-    Moan.selectButton = "z"
-    fuenteTexto = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
-    Moan.font = fuenteTexto
-    mapafile = "assets/maps/prueba.lua"
-    playerspawn = "player"
-    loadMap(mapafile)
-    fastmove = 1
-
-    gameContainer.debug = true
-    player.debug = true
-    player:addAnimation(
-        SpriteAnimation {
-            spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
-            width = 14,
-            height = 21
-        },
-        "front"
-    )
-
-    player:addAnimation(
-        SpriteAnimation {
-            spriteSheet = love.graphics.newImage("assets/gfx/characters/character2.png"),
-            width = 14,
-            height = 21
-        },
-        "back"
-    )
-    player.currentAnimation = "back"
-    gameContainer:addChild(player)
+    if drawMapStuff then
+        Moan.selectButton = "z"
+        fuenteTexto = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
+        Moan.font = fuenteTexto
+        mapafile = "assets/maps/prueba.lua"
+        playerspawn = "player"
+        loadMap(mapafile)
+        fastmove = 1
+    end
 end
 
 function love.update(delta)
     updateMap(delta)
-    Moan.update(delta)
-    lurker.update()
+    if drawMapStuff then
+        Moan.update(delta)
+    end
     gameContainer:update(delta)
 end
 
@@ -91,7 +70,7 @@ function love.draw(dt)
 
     drawMap()
 
-    gameContainer:draw(dt)
+    gameContainer:fullDraw(dt)
     Moan.draw()
     love.graphics.setColor(0, 0, 0)
     love.graphics.print("Current  FPS: " .. tostring(love.timer.getFPS()), 20, 30)

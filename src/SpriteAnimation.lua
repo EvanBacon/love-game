@@ -37,4 +37,5 @@ end
 function SpriteAnimation:getQuad()
     return self.quads[self.spriteIndex]
 end
+
 return SpriteAnimation

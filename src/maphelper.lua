@@ -1,6 +1,13 @@
 require "src.npcGenerator"
 
-function changemapa(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
+function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
+    local action = _G.action
+    local herofacing = _G.herofacing
+    local layer = _G.layer
+    local herodx = _G.herodx
+    local herody = _G.herody
+    local CheckCollision = _G.CheckCollision
+
     if
         action and herofacing == mirada and
             CheckCollision(
@@ -14,7 +21,7 @@ function changemapa(mirada, nombrewarp, destinofile, positionDestino, miradadest
                 nombrewarp.height
             )
      then
-        newMapa = destinofile
+        _G.newMapa = destinofile
         playerspawn = positionDestino
         if miradadestino == nil then
             herofacing = "down"
