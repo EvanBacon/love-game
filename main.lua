@@ -26,6 +26,11 @@ Input = require "src/Input"
 null = nil
 undefined = nil
 from = require
+console = {
+    log = function(...)
+        print(...)
+    end
+}
 
 local projectSettings = require "projectSettings"
 local Tilemap = require "src/Tilemap"

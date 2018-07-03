@@ -90,6 +90,12 @@ function Tilemap:load(config)
     -- end
 end
 
+function Tilemap:getSize()
+    local tilemapW = self.map.width * self.map.tilewidth
+    local tilemapH = self.map.height * self.map.tileheight
+    return tilemapW, tilemapH
+end
+
 function Tilemap:getPoints(entity)
     return self.entities[entity]
 end

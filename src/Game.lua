@@ -22,7 +22,7 @@ function Game:initialize(props)
     assert(self.tilemap, "Error: Game: need props.tilemap")
     assert(self.input, "Error: Game: need props.input")
 
-    self.scene:addChild(self.tilemap)
+    -- self.scene:addChild(self.tilemap)
 
     self.camera = Camera:new(self.input, self.tilemap)
 
