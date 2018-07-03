@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="tileset-pokemon_dawn" tilewidth="16" tileheight="16" tilecount="14758" columns="94">
- <image source="img/tileset-pokemon_dawn.png" trans="000000" width="1504" height="2519"/>
+<tileset name="tileset" tilewidth="16" tileheight="16" tilecount="14758" columns="94">
+ <image source="tileset.png" trans="000000" width="1504" height="2519"/>
  <terraintypes>
   <terrain name="ground/dirt_001" tile="0"/>
   <terrain name="ground/sand_001" tile="0"/>
@@ -30,6 +30,10 @@
   <terrain name="grass/overlay" tile="0"/>
   <terrain name="grass/overlay_thick" tile="0"/>
   <terrain name="beach/stone" tile="0"/>
+  <terrain name="mountain/grass" tile="0"/>
+  <terrain name="mountain/rock" tile="0"/>
+  <terrain name="mountain/grass_water" tile="0"/>
+  <terrain name="tiled" tile="0"/>
  </terraintypes>
  <tile id="658" terrain=",,,0"/>
  <tile id="659" terrain=",,0,0"/>
@@ -268,6 +272,12 @@
  <tile id="1991" terrain="7,,,"/>
  <tile id="1992" terrain="7,7,7,7"/>
  <tile id="1993" terrain="7,7,7,7"/>
+ <tile id="1994" terrain=",,,28"/>
+ <tile id="1995" terrain=",,28,28"/>
+ <tile id="1996" terrain=",,28,"/>
+ <tile id="1997" terrain="28,28,28,"/>
+ <tile id="1998" terrain="28,28,,"/>
+ <tile id="1999" terrain="28,28,,28"/>
  <tile id="2068" terrain=",,,25"/>
  <tile id="2069" terrain=",,25,25"/>
  <tile id="2070" terrain=",,25,"/>
@@ -283,6 +293,11 @@
  <tile id="2085" terrain=",,20,"/>
  <tile id="2086" terrain=",20,20,20"/>
  <tile id="2087" terrain="20,,20,20"/>
+ <tile id="2088" terrain=",28,,28"/>
+ <tile id="2089" terrain="28,28,28,28"/>
+ <tile id="2090" terrain="28,,28,"/>
+ <tile id="2091" terrain="28,,28,"/>
+ <tile id="2093" terrain=",28,,28"/>
  <tile id="2162" terrain=",25,,25"/>
  <tile id="2163" terrain="25,25,25,25"/>
  <tile id="2164" terrain="25,,25,"/>
@@ -298,6 +313,12 @@
  <tile id="2179" terrain="20,,20,"/>
  <tile id="2180" terrain="20,20,,20"/>
  <tile id="2181" terrain="20,20,20,"/>
+ <tile id="2182" terrain=",28,,"/>
+ <tile id="2183" terrain="28,28,,"/>
+ <tile id="2184" terrain="28,,,"/>
+ <tile id="2185" terrain="28,,28,28"/>
+ <tile id="2186" terrain=",,28,28"/>
+ <tile id="2187" terrain=",28,28,28"/>
  <tile id="2256" terrain=",25,,"/>
  <tile id="2257" terrain="25,25,,"/>
  <tile id="2258" terrain="25,,,"/>
@@ -444,4 +465,62 @@
  <tile id="3102" terrain=",27,,"/>
  <tile id="3103" terrain="27,27,,"/>
  <tile id="3104" terrain="27,,,"/>
+ <tile id="3216" terrain=",,,29"/>
+ <tile id="3217" terrain=",,29,29"/>
+ <tile id="3218" terrain=",,29,"/>
+ <tile id="3219" terrain="29,29,29,"/>
+ <tile id="3220" terrain="29,29,,"/>
+ <tile id="3221" terrain="29,29,,29"/>
+ <tile id="3310" terrain=",29,,29"/>
+ <tile id="3311" terrain="29,29,29,29"/>
+ <tile id="3312" terrain="29,,29,"/>
+ <tile id="3313" terrain="29,,29,"/>
+ <tile id="3315" terrain=",29,,29"/>
+ <tile id="3404" terrain=",29,,"/>
+ <tile id="3405" terrain="29,29,,"/>
+ <tile id="3406" terrain="29,,,"/>
+ <tile id="3407" terrain="29,,29,29"/>
+ <tile id="3408" terrain=",,29,29"/>
+ <tile id="3409" terrain=",29,29,29"/>
+ <tile id="3770" terrain=",,,30"/>
+ <tile id="3771" terrain=",,30,30"/>
+ <tile id="3772" terrain=",,30,"/>
+ <tile id="3864" terrain=",30,,30"/>
+ <tile id="3865" terrain="30,30,30,30"/>
+ <tile id="3866" terrain="30,,30,"/>
+ <tile id="3958" terrain=",30,,"/>
+ <tile id="3959" terrain="30,30,,"/>
+ <tile id="3960" terrain="30,,,"/>
+ <tile id="4052" terrain="30,30,30,"/>
+ <tile id="4053" terrain="30,30,,"/>
+ <tile id="4054" terrain="30,30,,30"/>
+ <tile id="4146" terrain="30,,30,"/>
+ <tile id="4148" terrain=",30,,30"/>
+ <tile id="4240" terrain="30,,30,30"/>
+ <tile id="4241" terrain=",,30,30"/>
+ <tile id="4242" terrain=",30,30,30"/>
+ <tile id="4914" terrain="31,31,31,"/>
+ <tile id="4915" terrain="31,31,,"/>
+ <tile id="4916" terrain="31,31,,31"/>
+ <tile id="5008" terrain="31,,31,"/>
+ <tile id="5010" terrain=",31,,31"/>
+ <tile id="5102" terrain="31,,31,31"/>
+ <tile id="5103" terrain=",,31,31"/>
+ <tile id="5104" terrain=",31,31,31"/>
+ <tile id="5195" terrain=",,,31"/>
+ <tile id="5196" terrain=",,31,31"/>
+ <tile id="5197" terrain=",,31,31"/>
+ <tile id="5198" terrain=",,31,"/>
+ <tile id="5289" terrain=",31,,31"/>
+ <tile id="5290" terrain="31,31,31,31"/>
+ <tile id="5291" terrain="31,31,31,31"/>
+ <tile id="5292" terrain="31,,31,"/>
+ <tile id="5383" terrain=",31,,31"/>
+ <tile id="5384" terrain="31,31,31,31"/>
+ <tile id="5385" terrain="31,31,31,31"/>
+ <tile id="5386" terrain="31,,31,"/>
+ <tile id="5477" terrain=",31,,"/>
+ <tile id="5478" terrain="31,31,,"/>
+ <tile id="5479" terrain="31,31,,"/>
+ <tile id="5480" terrain="31,,,"/>
 </tileset>

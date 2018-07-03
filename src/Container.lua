@@ -56,9 +56,13 @@ function Container:draw(dt)
     -- use the new coordinate system to draw the viewed scene
     self.children:forEach(
         function(child)
-            child:preDraw(dt)
+            if child.preDraw then
+                child:preDraw(dt)
+            end
             child:draw(dt)
-            child:postDraw(dt)
+            if child.postDraw then
+                child:postDraw(dt)
+            end
         end
     )
     self:drawDebug(dt)
@@ -77,23 +81,8 @@ function Container:fullDraw(dt)
 end
 
 function Container:postDraw(dt)
-    love.graphics.pop() -- return to the default coordinates
+    love.graphics.pop()
 end
-
--- function dump(o)
---     if type(o) == "table" then
---         local s = "{ "
---         for k, v in pairs(o) do
---             if type(k) ~= "number" then
---                 k = '"' .. k .. '"'
---             end
---             s = s .. "[" .. k .. "] = " .. dump(v) .. ","
---         end
---         return s .. "} "
---     else
---         return tostring(o)
---     end
--- end
 
 function Container:update(dt)
     self.children:forEach(

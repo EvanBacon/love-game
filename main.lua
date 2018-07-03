@@ -13,19 +13,26 @@ function uuid()
     )
 end
 
-_G.class = require("libs.class")
-_G.anim8 = require("src.anim8")
-_G.List = require("src.List")
-_G.Vector = require("src.Vector")
--- _G.SpriteAnimation = require("src.SpriteAnimation")
-_G.Game = require("src.Game")
-_G.Container = require("src.Container")
-_G.Sprite = require("src.Sprite")
-_G.Player = require("src.Player")
+class = require("libs.class")
+anim8 = require("src.anim8")
+List = require("src.List")
+Vector = require("src.Vector")
+Game = require("src.Game")
+Container = require("src.Container")
+Sprite = require("src.Sprite")
+Player = require("src.Player")
+Input = require "src/Input"
+
+null = nil
+undefined = nil
+from = require
+
+local projectSettings = require "projectSettings"
+local Tilemap = require "src/Tilemap"
 
 function love.load()
-    love.graphics.setDefaultFilter("nearest", "nearest", 1)
-    game = Game:new()
+    local setupScreen = require "utils/setupScreen"
+    setupScreen()
     testStuff()
 end
 
@@ -44,15 +51,38 @@ function drawDebugData()
     love.graphics.setColor(255, 255, 255)
 end
 
-function love.keypressed(key)
-    if key == "escape" or key == "c" then
-        love.event.quit()
-    end
+function love.keypressed(...)
+    game:keypressed(...)
+end
+
+function love.wheelmoved(x, y)
+    game:wheelmoved(x, y)
 end
 
 function testStuff()
-    image = love.graphics.newImage("assets/gfx/characters/character1.png")
-    function generateObject(props, animation, animationKey)
+    local config = projectSettings()
+    local tilemap = Tilemap:new()
+    tilemap:load(
+        {
+            world = {
+                map = "assets/maps/EmersonIsland.lua"
+            }
+        }
+    )
+
+    local input = Input:new()
+
+    game =
+        Game:new(
+        {
+            input = input,
+            tilemap = tilemap
+        }
+    )
+    game.scene.debug = true
+
+    image = love.graphics.newImage("assets/characters/character1.png")
+    function generasteObject(props, animation, animationKey)
         local g = anim8.newGrid(14, 21, image:getWidth(), image:getHeight())
         animation = anim8.newAnimation(g("1-4", 1), 0.1)
         animation.image = image
@@ -67,33 +97,24 @@ function testStuff()
         sprite.currentAnimation = animationKey
         sprite.debug = true
         game.scene:addChild(sprite)
+        return sprite
     end
 
-    game.scene.debug = true
+    -- GameWorld = Tilemap:new(Goblin, "goblins")
 
-    -- generateObject(
-    --     {
-    --         width = 14,
-    --         height = 21,
-    --         x = 100,
-    --         y = 0
-    --     },
-    --     animation,
-    --     "basic"
-    -- )
-
-    for i = 1, 30 do
-        for j = 1, 30 do
-            generateObject(
-                {
-                    width = 14,
-                    height = 21,
-                    x = 20 * i,
-                    y = 25 * j
-                },
-                animation,
-                "basic"
-            )
-        end
-    end
+    -- for i = 1, 30 do
+    --     for j = 1, 30 do
+    --         local sprite =
+    --             generateObject(
+    --             {
+    --                 width = 14,
+    --                 height = 21,
+    --                 x = 20 * i,
+    --                 y = 25 * j
+    --             },
+    --             animation,
+    --             "basic"
+    --         )
+    --     end
+    -- end
 end

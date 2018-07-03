@@ -78,7 +78,7 @@ function loadMap(currentMap)
         playerSpawnObject = Vector()
     end
     --heroes images
-    _G.player =
+    player =
         Player {
         width = 14,
         height = 21,
