@@ -30,6 +30,7 @@ local Container =
     end,
     children = {},
     scale = Vector(1, 1),
+    physicsOffset = Vector(),
     rotation = 0,
     flipH = false,
     flipV = false
@@ -52,16 +53,20 @@ function Container:preDraw(dt)
     local scaleY = self.scale.y
 
     if self.flipH then
+        local offset = (self.width or 0) * scaleX
+
         scaleX = scaleX * -1
-        translateX = translateX + (self.width or 0)
+        translateX = translateX + offset
     end
 
     if self.flipV then
+        local offset = (self.height or 0) * scaleY
+
         scaleY = scaleY * -1
-        translateY = translateY + (self.height or 0)
+        translateY = translateY + offset
     end
 
-    love.graphics.translate(translateX, translateY) -- move the camera position
+    love.graphics.translate(translateX + self.physicsOffset.x, translateY + self.physicsOffset.y) -- move the camera position
     love.graphics.scale(scaleX, scaleY) -- zoom the camera
 end
 

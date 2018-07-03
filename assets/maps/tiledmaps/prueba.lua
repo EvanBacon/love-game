@@ -8,7 +8,7 @@ return {
   height = 64,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 31,
+  nextobjectid = 37,
   properties = {
     ["Collider"] = "true"
   },
@@ -4163,10 +4163,10 @@ return {
           name = "player",
           type = "",
           shape = "rectangle",
-          x = 680,
-          y = 517,
-          width = 26.3333,
-          height = 24.6667,
+          x = 304.671,
+          y = 423.964,
+          width = 2.42805,
+          height = 2.39136,
           rotation = 0,
           visible = true,
           properties = {
@@ -4188,13 +4188,26 @@ return {
         },
         {
           id = 25,
-          name = "casi2",
+          name = "club",
           type = "",
           shape = "rectangle",
           x = 334.5,
-          y = 513.5,
+          y = 528.817,
           width = 19.5,
           height = 22.25,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 35,
+          name = "cave",
+          type = "",
+          shape = "rectangle",
+          x = 231.952,
+          y = 439.843,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
           properties = {}

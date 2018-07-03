@@ -9,7 +9,7 @@ function Mapload()
     poster1 = getObj("poster1")
     --warps
     casita = getObj("casita")
-    casi2 = getObj("casi2")
+    club = getObj("club")
     cave = getObj("cave")
     --npcs
     npcs = {}
@@ -21,10 +21,10 @@ end
 function Mapdraw()
 end
 function Mapupdate(delta)
-    --function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
+    --function changeMap(mirada, nameDoor, destinofile, positionDestino, miradadestino)
     changeMap("top", casita, "assets/maps/casita.lua", "warp")
-    changeMap("top", casi2, "assets/maps/casi2.lua", "prueba", "top")
-    changeMap("top", cave, "assets/maps/cave.lua", "prueba", "top")
+    changeMap("top", club, "assets/maps/casi2.lua", "prueba", "top")
+    -- changeMap("top", cave, "assets/maps/cave.lua", "prueba", "top")
     if canispeaktothesign("top", poster1) then
         allowMove = false --lockall
         avatarmoan = love.graphics.newImage("assets/gfx/imagesmoan/wallSign.png")

@@ -1,4 +1,9 @@
-function controls(x, y, speed, delta)
+local xt = 0
+local xy = 0
+
+function controls(speed, delta)
+    local x = 0
+    local y = 0
     if allowMove == true then
         if not tactil then
             if love.keyboard.isDown("right") then

@@ -26,6 +26,11 @@ function SpriteAnimation:build()
     end
 end
 
+function SpriteAnimation:reset()
+    self.currentTime = 0
+    self:update(0)
+end
+
 function SpriteAnimation:update(dt)
     self.spriteIndex = math.floor(self.currentTime / self.duration * #self.quads) + 1
     self.currentTime = self.currentTime + dt

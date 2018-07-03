@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextobjectid="37">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextobjectid="31">
  <properties>
   <property name="Collider" value="true"/>
  </properties>
@@ -442,14 +442,13 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="21" name="player" x="304.671" y="423.964" width="2.42805" height="2.39136">
+  <object id="21" name="player" x="680" y="517" width="26.3333" height="24.6667">
    <properties>
     <property name="player" type="bool" value="false"/>
    </properties>
   </object>
   <object id="22" name="casita" x="752" y="451.667" width="19.3333" height="23.3333"/>
-  <object id="25" name="club" x="334.5" y="528.817" width="19.5" height="22.25"/>
-  <object id="35" name="cave" x="231.952" y="439.843"/>
+  <object id="25" name="casi2" x="334.5" y="513.5" width="19.5" height="22.25"/>
  </objectgroup>
  <objectgroup name="flowers">
   <object id="26" name="flower" x="288.588" y="560.18" width="14.915" height="15.2619"/>

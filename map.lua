@@ -7,12 +7,14 @@ local newAnimation = require "src.newAnimation"
 
 local tx
 local ty
-local scale
+local scale = 1
 function drawMap()
     if not map then
         return
     end
-    map:draw(-tx, -ty, scale)
+    map:draw(-tx, -ty, scale, scale)
+    game.scene.position.x = screen_width - layer.hero.position.x
+    game.scene.position.y = screen_height - layer.hero.position.y
     Mapdraw()
 end
 
@@ -61,7 +63,9 @@ function loadMap(currentMap)
         position = Vector(playerSpawnObject.x, playerSpawnObject.y)
     }
     player.debug = true
-
+    player.scale.x = scale
+    player.scale.y = scale
+    player.physicsOffset = Vector(-player.width, -player.height)
     player:addAnimation(
         SpriteAnimation {
             spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
@@ -89,8 +93,12 @@ function loadMap(currentMap)
     player.currentAnimation = "top"
 
     game.scene:addChild(player)
+
+    game.scene.position.x = screen_width - player.position.x
+    game.scene.position.y = screen_height - player.position.y
+
     --physics
-    player:enablePhysics("dynamic")
+    player:enablePhysics(player.width * 0.7, player.height * 0.7, "dynamic")
     player.body:setLinearDamping(12)
     player.body:setFixedRotation(true)
 
@@ -150,12 +158,11 @@ function updateMap(delta)
     end
     speed = speed * delta
 
-    local x, y = controls(0, 0, speed, delta)
+    local x, y = controls(speed, delta)
     layer.hero.body:applyForce(x, y)
 
-    tx = math.floor(layer.hero.position.x - screen_width / 2)
-    ty = math.floor(layer.hero.position.y - screen_height / 2)
-
+    tx = math.floor(layer.hero.position.x - (screen_width / 2))
+    ty = math.floor(layer.hero.position.y - (screen_height / 2))
     map:update(delta)
 
     if (newMapa ~= mapa) then

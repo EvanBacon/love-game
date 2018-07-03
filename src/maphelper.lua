@@ -1,24 +1,46 @@
 require "src.npcGenerator"
 
-function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
+function changeMap(mirada, nameDoor, destinofile, positionDestino, miradadestino)
     local action = _G.action
     local herofacing = _G.herofacing
     local layer = _G.layer
-    local herodx = _G.herodx
-    local herody = _G.herody
-    local CheckCollision = _G.CheckCollision
 
-    if
-        action and herofacing == mirada and
+    local CheckCollision = _G.CheckCollision
+    -- herofacing == mirada and
+
+    if miradadestino == "top" then
+        print(
+            nameDoor.x,
+            nameDoor.y,
+            nameDoor.width,
+            nameDoor.height,
+            layer.hero.position.x,
+            layer.hero.position.y,
+            layer.hero.width,
+            layer.hero.height,
             CheckCollision(
                 layer.hero.position.x,
                 layer.hero.position.y,
-                herodx,
-                herody,
-                nombrewarp.x,
-                nombrewarp.y,
-                nombrewarp.width,
-                nombrewarp.height
+                layer.hero.width,
+                layer.hero.height,
+                nameDoor.x,
+                nameDoor.y,
+                nameDoor.width,
+                nameDoor.height
+            )
+        )
+    end
+    if
+        action and
+            CheckCollision(
+                layer.hero.position.x,
+                layer.hero.position.y,
+                layer.hero.width,
+                layer.hero.height,
+                nameDoor.x,
+                nameDoor.y,
+                nameDoor.width,
+                nameDoor.height
             )
      then
         _G.newMapa = destinofile
@@ -35,8 +57,8 @@ function canispeaktothesign(facing, signObj)
         CheckCollision(
             layer.hero.position.x,
             layer.hero.position.y,
-            herodx,
-            herody,
+            layer.hero.width,
+            layer.hero.height,
             signObj.x,
             signObj.y,
             signObj.width,
@@ -48,8 +70,8 @@ function canispeaktothenpc(npc)
         CheckCollision(
             layer.hero.position.x,
             layer.hero.position.y,
-            herodx,
-            herody,
+            layer.hero.width,
+            layer.hero.height,
             npc.x,
             npc.y,
             npc.width,

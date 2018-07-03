@@ -11,6 +11,6 @@ function Mapdraw()
 end
 
 function Mapupdate(delta)
-    --function changeMap(mirada, nombrewarp, destinofile, positionDestino, miradadestino)
+    --function changeMap(mirada, nameDoor, destinofile, positionDestino, miradadestino)
     changeMap("down", prueba, "assets/maps/prueba.lua", "cave")
 end

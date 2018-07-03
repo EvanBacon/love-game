@@ -1,6 +1,5 @@
 local love = _G.love
 local class = _G.class
-local Container = Container
 
 local Game =
     class {

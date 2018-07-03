@@ -25,6 +25,11 @@ _G.drawMapStuff = true
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest", 1)
     Moan.selectButton = "z"
+
+    local screen_width = love.graphics.getWidth()
+    local screen_height = love.graphics.getHeight()
+
+    -- game.scene.position = Vector(-screen_width / 2, screen_height / 2)
     -- Moan.font = love.graphics.newFont("libs/Moan/assets/Pixel UniCode.ttf", 32)
     currentMap = "assets/maps/prueba.lua"
     playerSpawnObject = "player"
@@ -53,7 +58,7 @@ function love.draw(dt)
     if not layer then
         return
     end
-    action = Moan.showingMessage
+    action = not Moan.showingMessage
 
     if drawMapStuff then
         drawMap()
@@ -81,7 +86,7 @@ end
 
 function love.keyreleased(key, key, isrepeat)
     if key == "z" then
-        action = not action
+        action = true
     end
     Moan.keyreleased(key)
 end
