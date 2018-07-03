@@ -423,13 +423,13 @@
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
-  <object id="19" name="sven" x="558.667" y="554" width="20" height="20">
+  <object id="19" name="charlie" x="558.667" y="554" width="20" height="20">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sensor" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="24" name="manuel" x="511.333" y="510.167" width="20" height="20">
+  <object id="24" name="nik" x="511.333" y="510.167" width="20" height="20">
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="sensor" type="bool" value="true"/>
@@ -442,17 +442,16 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="21" name="player" x="304.671" y="423.964" width="2.42805" height="2.39136">
+  <object id="21" name="player" x="694.094" y="533.457" width="2.42805" height="2.39136">
    <properties>
     <property name="player" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="22" name="casita" x="752" y="451.667" width="19.3333" height="23.3333"/>
+  <object id="22" name="home" x="752" y="451.667" width="19.3333" height="23.3333"/>
   <object id="25" name="club" x="334.5" y="528.817" width="19.5" height="22.25"/>
   <object id="35" name="cave" x="231.952" y="439.843"/>
  </objectgroup>
  <objectgroup name="flowers">
-  <object id="26" name="flower" x="288.588" y="560.18" width="14.915" height="15.2619"/>
   <object id="30" name="rose" x="712.514" y="570.414" visible="0"/>
  </objectgroup>
  <layer name="shadow" width="64" height="64" visible="0" opacity="0.5">

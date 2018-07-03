@@ -1,25 +1,25 @@
 local love = _G.love
 local newAnimation = require "src.newAnimation"
 
-function generateObject(layer, nombre, tipo, tabla)
-    nombre = getObj(nombre)
-    layer.nombre = {
-        x = nombre.x,
-        y = nombre.y,
-        width = nombre.width,
-        height = nombre.height
+function generateObject(layer, objectName, animation, animationKey)
+    local object = getObj(objectName)
+
+    local sprite =
+        Sprite {
+        position = Vector(object.x, object.y),
+        width = object.width,
+        height = object.height
     }
+    print(object.x, object.y)
+    sprite:addAnimation(animation, animationKey)
+    sprite.currentAnimation = animationKey
+    -- sprite:enablePhysics(object.width * 0.7, object.height * 0.7, "static")
+    -- sprite.body:setLinearDamping(12)
+    -- sprite.body:setFixedRotation(true)
 
-    layer.nombre.body = love.physics.newBody(game.world, layer.nombre.x + 10, layer.nombre.y + 15, "static")
-    layer.nombre.body:setLinearDamping(12)
-    layer.nombre.body:setFixedRotation(true)
-    layer.nombre.shape = love.physics.newRectangleShape(15, 10)
-    layer.nombre.fixture = love.physics.newFixture(layer.nombre.body, layer.nombre.shape)
-
-    layer.nombre.image = love.graphics.newImage("assets/gfx/characters/npc/" .. tipo .. "/back.png")
-    layer.nombre.animation = newAnimation(layer.nombre.image, 14, 19, 1)
-    table.insert(tabla, layer.nombre)
-    return layer.nombre
+    -- objectsContainer:addChild(sprite)
+    --     love.physics.newBody(game.world, layer.npcObjectLayer.x + 10, layer.npcObjectLayer.y + 15, "static")
+    return sprite
 end
 
 function drawObject(object)

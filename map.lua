@@ -13,14 +13,38 @@ function drawMap()
         return
     end
     map:draw(-tx, -ty, scale, scale)
-    game.scene.position.x = screen_width - layer.hero.position.x
-    game.scene.position.y = screen_height - layer.hero.position.y
+    objectsContainer.position.x = -tx
+    objectsContainer.position.y = -ty
+    playerContainer.position.x = screen_width - layer.hero.position.x
+    playerContainer.position.y = screen_height - layer.hero.position.y
     Mapdraw()
 end
+
+local playerSideAnimation =
+    SpriteAnimation {
+    spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
+    width = 14,
+    height = 21
+}
+
+local playerTopAnimation =
+    SpriteAnimation {
+    spriteSheet = love.graphics.newImage("assets/gfx/characters/character2.png"),
+    width = 14,
+    height = 21
+}
+
+local playerBottomAnimation =
+    SpriteAnimation {
+    spriteSheet = love.graphics.newImage("assets/gfx/characters/character3.png"),
+    width = 14 + 1,
+    height = 21
+}
 
 function loadMap(currentMap)
     love.filesystem.load(currentMap)()
     love.filesystem.load("src/npcGenerator.lua")
+    playerContainer:removeAllChildren()
     --update mapa
     newMapa = currentMap
     mapa = currentMap
@@ -47,17 +71,15 @@ function loadMap(currentMap)
     screen_width = love.graphics.getWidth() / scale
     screen_height = love.graphics.getHeight() / scale
 
-    --hero
-    if herofacing == nil then
-        herofacing = "down"
-    end
     xt, yt = 0, 0
 
     playerSpawnObject = getObj(playerSpawnObject)
-
+    if (not playerSpawnObject) then
+        playerSpawnObject = Vector()
+    end
     --heroes images
-    local player =
-        Sprite {
+    _G.player =
+        Player {
         width = 14,
         height = 21,
         position = Vector(playerSpawnObject.x, playerSpawnObject.y)
@@ -66,36 +88,15 @@ function loadMap(currentMap)
     player.scale.x = scale
     player.scale.y = scale
     player.physicsOffset = Vector(-player.width, -player.height)
-    player:addAnimation(
-        SpriteAnimation {
-            spriteSheet = love.graphics.newImage("assets/gfx/characters/character1.png"),
-            width = 14,
-            height = 21
-        },
-        "side"
-    )
-    player:addAnimation(
-        SpriteAnimation {
-            spriteSheet = love.graphics.newImage("assets/gfx/characters/character2.png"),
-            width = 14,
-            height = 21
-        },
-        "top"
-    )
-    player:addAnimation(
-        SpriteAnimation {
-            spriteSheet = love.graphics.newImage("assets/gfx/characters/character3.png"),
-            width = 14 + 1,
-            height = 21
-        },
-        "bottom"
-    )
+    player:addAnimation(playerSideAnimation, "side")
+    player:addAnimation(playerTopAnimation, "top")
+    player:addAnimation(playerBottomAnimation, "bottom")
     player.currentAnimation = "top"
 
-    game.scene:addChild(player)
+    playerContainer:addChild(player)
 
-    game.scene.position.x = screen_width - player.position.x
-    game.scene.position.y = screen_height - player.position.y
+    playerContainer.position.x = screen_width - player.position.x
+    playerContainer.position.y = screen_height - player.position.y
 
     --physics
     player:enablePhysics(player.width * 0.7, player.height * 0.7, "dynamic")
@@ -111,9 +112,6 @@ function loadMap(currentMap)
 end
 
 function doMusicStuff()
-    --override layer:draw
-    love.filesystem.load("src/playerlayerdraw.lua")()
-
     --create musicplayer
     --comprobamos si se carga nueva musica
     if music == mapmusic then
@@ -133,12 +131,12 @@ end
 function doGameDayCycleStuff()
     --DAYNIGHT SYSTEM
     time = os.date("*t")
-    if time.hour > 19 or time.hour < 6 then
-        if map.layers["shadow"] ~= nil and map.layers["light1"] ~= nil then
-            map.layers["shadow"].visible = true
-            map.layers["light1"].visible = true
-            if map.layers["light2"] ~= nil then
-                map.layers["light2"].visible = true
+    if time.hour % 2 == 0 then
+        if map.layers["shadowLayer"] ~= nil and map.layers["light1Layer"] ~= nil then
+            map.layers["shadowLayer"].visible = true
+            map.layers["light1Layer"].visible = true
+            if map.layers["light2Layer"] ~= nil then
+                map.layers["light2Layer"].visible = true
             end
         end
     end
@@ -159,21 +157,14 @@ function updateMap(delta)
     speed = speed * delta
 
     local x, y = controls(speed, delta)
-    layer.hero.body:applyForce(x, y)
-
+    if layer.hero.body then
+        layer.hero.body:applyForce(x, y)
+    end
     tx = math.floor(layer.hero.position.x - (screen_width / 2))
     ty = math.floor(layer.hero.position.y - (screen_height / 2))
     map:update(delta)
 
     if (newMapa ~= mapa) then
         loadMap(newMapa)
-    end
-end
-
-function drawObjects(npcs)
-    function layernpc:draw()
-        for k, nombre in pairs(npcs) do
-            drawObject(nombre)
-        end
     end
 end

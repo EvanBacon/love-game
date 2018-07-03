@@ -3,8 +3,9 @@ local love = love
 
 local SpriteAnimation =
     class {
+    _kind = "SpriteAnimation",
     -- { spriteSheet: Image, width: number, height: number, duration: double }
-    constructor = function(self, props)
+    init = function(self, props)
         self.spriteSheet = props.spriteSheet
         self.width = props.width or self.spriteSheet.getHeight()
         self.height = props.height or self.spriteSheet.getWidth()

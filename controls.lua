@@ -24,15 +24,15 @@ function controls(speed, delta)
             end
             if x == 0 then
                 if y > 0 then
-                    herofacing = "down"
+                    player.direction = "down"
                 elseif y < 0 then
-                    herofacing = "top"
+                    player.direction = "top"
                 end
             else
                 if x > 0 then
-                    herofacing = "right"
+                    player.direction = "right"
                 elseif x < 0 then
-                    herofacing = "left"
+                    player.direction = "left"
                 end
             end
         else
@@ -43,15 +43,15 @@ function controls(speed, delta)
 
             if math.abs(x) < 50 then
                 if y > 0 then
-                    herofacing = "down"
+                    player.direction = "down"
                 elseif y < 0 then
-                    herofacing = "top"
+                    player.direction = "top"
                 end
             else
                 if x > 0 then
-                    herofacing = "right"
+                    player.direction = "right"
                 elseif x < 0 then
-                    herofacing = "left"
+                    player.direction = "left"
                 end
             end
             if (x > 200) then

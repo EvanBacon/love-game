@@ -4101,7 +4101,7 @@ return {
       objects = {
         {
           id = 19,
-          name = "sven",
+          name = "charlie",
           type = "",
           shape = "rectangle",
           x = 558.667,
@@ -4117,7 +4117,7 @@ return {
         },
         {
           id = 24,
-          name = "manuel",
+          name = "nik",
           type = "",
           shape = "rectangle",
           x = 511.333,
@@ -4163,8 +4163,8 @@ return {
           name = "player",
           type = "",
           shape = "rectangle",
-          x = 304.671,
-          y = 423.964,
+          x = 694.094,
+          y = 533.457,
           width = 2.42805,
           height = 2.39136,
           rotation = 0,
@@ -4175,7 +4175,7 @@ return {
         },
         {
           id = 22,
-          name = "casita",
+          name = "home",
           type = "",
           shape = "rectangle",
           x = 752,
@@ -4224,19 +4224,6 @@ return {
       draworder = "topdown",
       properties = {},
       objects = {
-        {
-          id = 26,
-          name = "flower",
-          type = "",
-          shape = "rectangle",
-          x = 288.588,
-          y = 560.18,
-          width = 14.915,
-          height = 15.2619,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
         {
           id = 30,
           name = "rose",

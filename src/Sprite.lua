@@ -1,27 +1,27 @@
 local class = class
 local love = love
-local Container = Container
 
 --[[
 body.setType()
 body.getType()
 --]]
-local Sprite =
-    class {
-    _extends = Container,
-    constructor = function(self, props)
-        props = props or {}
-        Container.constructor(self, props)
-        self.bodyType = props.bodyType
-    end,
-    animations = {},
-    currentAnimation = nil,
-    moving = false
-}
+local Sprite = class("Sprite", Container)
+
+function Sprite:initialize(props)
+    props = props or {}
+    Container.initialize(self, props)
+    self.bodyType = props.bodyType
+    self.animations = {}
+    self.currentAnimation = nil
+    self.moving = true
+end
 
 function Sprite:addAnimation(animation, key)
     self.animations[key or #self.animations + 1] = animation
     animation:update(0)
+    if not self.currentAnimation then
+        self.currentAnimation = key
+    end
 end
 
 function Sprite:enablePhysics(width, height, type)
@@ -30,14 +30,13 @@ end
 
 function Sprite:setWorld(world, width, height, type)
     self.world = world
-    local absolutePosition = self:getAbsolutePosition()
-    self.body = love.physics.newBody(world, absolutePosition.x, absolutePosition.y, type)
+    self.body = love.physics.newBody(world, self.position.x, self.position.y, type)
     self.shape = love.physics.newRectangleShape(width, height) --make a rectangle with a width of 650 and a height of 50
     self.fixture = love.physics.newFixture(self.body, self.shape) --attach shape to body
 end
 
 function Sprite:update(dt)
-    Container.draw(self, dt)
+    Container.update(self, dt)
     if self.moving then
         -- maybe just update one animation
         for _, animation in pairs(self.animations) do
@@ -45,7 +44,7 @@ function Sprite:update(dt)
         end
     else
         for _, animation in pairs(self.animations) do
-            animation:reset()
+            -- animation:reset()
         end
     end
 
@@ -62,15 +61,9 @@ end
 
 function Sprite:draw(dt)
     Container.draw(self, dt)
-
     local animation = self:getCurrentAnimation()
     if animation then
-        local quad = animation:getQuad()
-        if quad then
-            love.graphics.draw(animation.spriteSheet, quad, 0, 0, self.rotation, 1, 1, 0, 0)
-        else
-            assert("Sprite: Error: quad isn't valid")
-        end
+        animation:draw(animation.image, 0, 0, self.rotation, 1, 1, 0, 0)
     elseif self.image then
         love.graphics.draw(self.image, 0, 0, self.rotation, 1, 1, 0, 0)
     end

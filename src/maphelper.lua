@@ -2,34 +2,11 @@ require "src.npcGenerator"
 
 function changeMap(mirada, nameDoor, destinofile, positionDestino, miradadestino)
     local action = _G.action
-    local herofacing = _G.herofacing
+
     local layer = _G.layer
 
     local CheckCollision = _G.CheckCollision
-    -- herofacing == mirada and
 
-    if miradadestino == "top" then
-        print(
-            nameDoor.x,
-            nameDoor.y,
-            nameDoor.width,
-            nameDoor.height,
-            layer.hero.position.x,
-            layer.hero.position.y,
-            layer.hero.width,
-            layer.hero.height,
-            CheckCollision(
-                layer.hero.position.x,
-                layer.hero.position.y,
-                layer.hero.width,
-                layer.hero.height,
-                nameDoor.x,
-                nameDoor.y,
-                nameDoor.width,
-                nameDoor.height
-            )
-        )
-    end
     if
         action and
             CheckCollision(
@@ -46,14 +23,14 @@ function changeMap(mirada, nameDoor, destinofile, positionDestino, miradadestino
         _G.newMapa = destinofile
         playerSpawnObject = positionDestino
         if miradadestino == nil then
-            herofacing = "down"
+            player.direction = "down"
         else
-            herofacing = miradadestino
+            player.direction = miradadestino
         end
     end
 end
 function canispeaktothesign(facing, signObj)
-    return action and not Moan.showingMessage and facing == herofacing and
+    return action and not Moan.showingMessage and facing == player.direction and
         CheckCollision(
             layer.hero.position.x,
             layer.hero.position.y,
