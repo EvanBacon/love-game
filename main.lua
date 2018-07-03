@@ -28,7 +28,18 @@ undefined = nil
 from = require
 console = {
     log = function(...)
+        -- local args = (...)
+        -- if type(args) == "table" then
+        --     for k, v in pairs(args) do
+        --         if type(v) == "table" then
+        --             console.log(v)
+        --         else
+        --             print(k, v)
+        --         end
+        --     end
+        -- else
         print(...)
+        -- end
     end
 }
 
@@ -66,6 +77,16 @@ end
 
 function testStuff()
     local config = projectSettings()
+
+    local input = Input:new()
+
+    game =
+        Game:new(
+        {
+            input = input
+        }
+    )
+
     local tilemap = Tilemap:new()
     tilemap:load(
         {
@@ -74,16 +95,8 @@ function testStuff()
             }
         }
     )
+    game:setTilemap(tilemap)
 
-    local input = Input:new()
-
-    game =
-        Game:new(
-        {
-            input = input,
-            tilemap = tilemap
-        }
-    )
     game.scene.debug = true
 
     image = love.graphics.newImage("assets/characters/character1.png")

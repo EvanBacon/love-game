@@ -42,16 +42,23 @@ function Tilemap:load(config)
     self.entities["spawn"] = {}
 
     local spawn = self.map.layers["spawn"]
-    if spawn and spawn.data then
+
+    console.log("has", self.map.layers)
+    if spawn and spawn.objects then
         local spawnPoint = nil
         if spawn ~= nil then
-            for y, xTable in pairs(spawn.data) do
-                for x, _ in pairs(xTable) do
-                    spawnPoint = Point:new(x, y)
-                    break
+            for index, object in ipairs(spawn.objects) do
+                if object.type == "player" and not game.player then
+                    game.playerData = object
+                elseif object.type == "npc" then
                 end
+                -- for x, _ in pairs(xTable) do
+                --     spawnPoint = Point:new(x, y)
+                --     break
+                -- end
             end
         end
+        console.log("spawn point", spawnPoint)
     end
 
     -- food layer

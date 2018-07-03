@@ -39,6 +39,7 @@ function Camera:draw()
     self.x = x
     self.y = y
     self.map.map:draw(-x, -y)
+    game.scene.position:setMuted(-x, -y)
 end
 
 function Camera:clampPoint(x, y)

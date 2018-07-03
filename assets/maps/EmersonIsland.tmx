@@ -794,10 +794,10 @@
 </data>
  </layer>
  <objectgroup name="spawn">
-  <object id="2" name="spawn" x="1039.37" y="1583.74">
+  <object id="2" name="spawn" type="player" x="1039.37" y="1583.74">
    <point/>
   </object>
-  <object id="4" name="charlie" x="1183.01" y="1617.65">
+  <object id="4" name="charlie" type="npc" x="1183.01" y="1617.65">
    <point/>
   </object>
  </objectgroup>

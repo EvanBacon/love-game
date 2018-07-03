@@ -3030,7 +3030,7 @@ return {
         {
           id = 2,
           name = "spawn",
-          type = "",
+          type = "player",
           shape = "point",
           x = 1039.37,
           y = 1583.74,
@@ -3043,7 +3043,7 @@ return {
         {
           id = 4,
           name = "charlie",
-          type = "",
+          type = "npc",
           shape = "point",
           x = 1183.01,
           y = 1617.65,

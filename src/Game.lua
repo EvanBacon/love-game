@@ -16,21 +16,39 @@ function Game:initialize(props)
         self.scene = Container:new()
     end
 
-    self.tilemap = props.tilemap
     self.input = props.input
 
-    assert(self.tilemap, "Error: Game: need props.tilemap")
     assert(self.input, "Error: Game: need props.input")
-
-    -- self.scene:addChild(self.tilemap)
-
-    self.camera = Camera:new(self.input, self.tilemap)
 
     love.physics.setMeter(16)
     self.world = love.physics.newWorld(0, 0)
-    self.tilemap.map:box2d_init(self.world)
-    self.scene:addChild(self.camera)
     -- self.camera:renderWithRelativePosition(1, 0)
+end
+
+function Game:setTilemap(tilemap)
+    self.tilemap = tilemap
+    self.tilemap.map:box2d_init(self.world)
+    self:buildCamera(self.input, self.tilemap)
+    if self.playerData then
+        self:setPlayer(Player:new(self.playerData))
+        self.player.width = 13
+        self.player.height = 29
+        self.player.debug = true
+        -- self.player.position:setMuted(-10, 0)
+        self.camera:renderWithRelativePosition(0.5, 0.8)
+    end
+end
+
+function Game:buildCamera(input, tilemap)
+    self.camera = Camera:new(input, tilemap)
+    self.scene:addChild(self.camera)
+end
+
+function Game:setPlayer(player)
+    self.player = player
+    console.log("add player", self.player.position.x)
+
+    self.scene:addChild(player)
 end
 
 function Game:update(dt)

@@ -10,6 +10,13 @@ function Container:initialize(props)
     self.width = props.width or 0
     self.height = props.height or 0
     self.position = props.position or Vector()
+
+    if props.x or props.y then
+        self.position = Vector(props.x or 0, props.y or 0)
+    else
+        self.position = props.position or Vector()
+    end
+
     self.children = List()
     self.scale = Vector(1, 1)
     self.physicsOffset = Vector()
@@ -92,9 +99,9 @@ function Container:update(dt)
     )
 end
 
-function Container:addChild(child)
+function Container:addChild(child, index)
     child.parent = self
-    self.children:add(child, child.__key)
+    self.children:add(child, index or child.__key)
 end
 
 function Container:removeChild(child)
@@ -108,7 +115,7 @@ function Container:removeAllChildren()
             child.parent = nil
         end
     )
-    self.children = {}
+    self.children = List()
 end
 
 return Container
