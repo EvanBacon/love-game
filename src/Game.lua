@@ -29,20 +29,19 @@ function Game:initialize(props)
     love.physics.setMeter(16)
     self.world = love.physics.newWorld(0, 0)
     self.tilemap.map:box2d_init(self.world)
+    self.scene:addChild(self.camera)
+    -- self.camera:renderWithRelativePosition(1, 0)
 end
 
 function Game:update(dt)
-    self.camera:checkInputs(dt)
     self.scene:update(dt)
     self.world:update(dt)
 end
 
 function Game:draw(dt)
-    self.camera:set()
     -- push:start()
     self.scene:fullDraw(dt)
     -- push:finish()
-    self.camera:unset()
 end
 
 -- Possibly move this to an abstraction of class

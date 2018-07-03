@@ -48,8 +48,8 @@ function Container:preDraw(dt)
         translateY = translateY + offset
     end
 
-    love.graphics.translate(translateX + self.physicsOffset.x, translateY + self.physicsOffset.y) -- move the camera position
-    love.graphics.scale(scaleX, scaleY) -- zoom the camera
+    love.graphics.translate(translateX + self.physicsOffset.x, translateY + self.physicsOffset.y)
+    love.graphics.scale(scaleX, scaleY)
 end
 
 function Container:draw(dt)

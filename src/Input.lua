@@ -17,10 +17,10 @@ function Input:getCameraMovement()
         self._delta.x = self._delta.x - 1
     end
     if love.keyboard.isDown("w") then
-        self._delta.y = self._delta.y + 1
+        self._delta.y = self._delta.y - 1
     end
     if love.keyboard.isDown("s") then
-        self._delta.y = self._delta.y - 1
+        self._delta.y = self._delta.y + 1
     end
     return self._delta
 end
