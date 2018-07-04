@@ -10,6 +10,7 @@ local Sprite = class("Sprite", Container)
 function Sprite:initialize(props)
     props = props or {}
     Container.initialize(self, props)
+    self.input = props.input
     self.bodyType = props.bodyType
     self.animations = {}
     self.currentAnimation = nil
@@ -36,6 +37,12 @@ function Sprite:setWorld(world, width, height, type)
     self.fixture = love.physics.newFixture(self.body, self.shape) --attach shape to body
 end
 
+function Sprite:move(dx, dy)
+    if self.body then
+        self.body:applyForce(dx, dy)
+    end
+end
+
 function Sprite:update(dt)
     Container.update(self, dt)
     if self.moving then
@@ -51,6 +58,15 @@ function Sprite:update(dt)
 
     if self.body then
         self.position.x, self.position.y = self.body:getPosition()
+    end
+
+    self:updateInput(dt)
+end
+
+function Sprite:updateInput(dt)
+    if self.input then
+        local delta = self.input:getCameraMovement()
+        self:move(delta.x * dt * self.speed, delta.y * dt * self.speed)
     end
 end
 

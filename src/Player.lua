@@ -35,6 +35,12 @@ function Player:initialize(props)
     self.scale.y = 5
     self:setDirection("down")
     self.moving = true
+
+    self:enablePhysics(self.width * 0.7, self.height * 0.7, "dynamic")
+    self.body:setLinearDamping(12)
+    self.body:setFixedRotation(true)
+
+    self.speed = 250 * 100
 end
 
 function Player:setDirection(direction)
@@ -47,8 +53,10 @@ function Player:setDirection(direction)
     end
 end
 
--- function Player:update(dt)
---     Sprite.update(self, dt)
--- end
+function Player:updateInput(dt)
+    if not game.isControllingCamera then
+        Sprite.updateInput(self, dt)
+    end
+end
 
 return Player

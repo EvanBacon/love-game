@@ -16,6 +16,7 @@ function Game:initialize(props)
         self.scene = Container:new()
     end
 
+    self.isControllingCamera = false
     self.input = props.input
 
     assert(self.input, "Error: Game: need props.input")
@@ -32,6 +33,7 @@ function Game:setTilemap(tilemap)
     if self.playerData then
         self:setPlayer(Player:new(self.playerData))
         self.player.debug = true
+        self.player.input = self.input
         self.camera:renderWithRelativePosition(0.5, 0.8)
     end
 end
@@ -69,6 +71,8 @@ function Game:keypressed(key)
     print(key)
     if key == "escape" or key == "c" then
         love.event.quit()
+    elseif key == "e" then
+        self.isControllingCamera = not self.isControllingCamera
     end
     self.input._scrollDelta = y
 end

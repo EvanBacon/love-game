@@ -27,8 +27,10 @@ function Camera:getCameraCenter()
 end
 
 function Camera:update(dt)
-    local delta = self.input:getCameraMovement()
-    self:move(delta.x * dt * self.movementSpeed, delta.y * dt * self.movementSpeed)
+    if game.isControllingCamera then
+        local delta = self.input:getCameraMovement()
+        self:move(delta.x * dt * self.movementSpeed, delta.y * dt * self.movementSpeed)
+    end
 end
 
 function Camera:draw()

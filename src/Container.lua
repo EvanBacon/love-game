@@ -33,6 +33,15 @@ function Container:getAbsolutePosition()
     end
 end
 
+function Container:getAbsoluteScale()
+    if self.parent then
+        local scale = self.parent:getAbsoluteScale()
+        return Vector(scale.x * self.scale.x, scale.y * self.scale.y)
+    else
+        return self.scale
+    end
+end
+
 function Container:preDraw(dt)
     love.graphics.push() -- stores the default coordinate system
 
