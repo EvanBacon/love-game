@@ -7,7 +7,6 @@ local Scene = class('Scene', Node)
 function Scene:initialize(props)
     props = props or {}
     Node.initialize(self, props)
-    self.debugPhysics = true
 end
 
 function Scene:draw(dt)

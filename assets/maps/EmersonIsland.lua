@@ -2880,7 +2880,7 @@ return {
       y = 0,
       width = 128,
       height = 128,
-      visible = true,
+      visible = false,
       opacity = 0.63,
       offsetx = 0,
       offsety = 0,

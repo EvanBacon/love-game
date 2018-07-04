@@ -20,7 +20,6 @@ function Game:initialize(props)
         self.scene = Scene:new()
     end
 
-    self.debugPhysics = true
     self.isControllingCamera = false
     self.input = props.input
 
@@ -37,7 +36,6 @@ function Game:setTilemap(tilemap)
     self:buildCamera(self.input, self.tilemap)
     if self.playerData then
         self:setPlayer(Player:new(self.playerData))
-        self.player.debug = true
         self.player.input = self.input
         self.camera:renderWithRelativePosition(0.5, 0.8)
     end
@@ -77,6 +75,10 @@ function Game:keypressed(key)
         love.event.quit()
     elseif key == 'e' then
         self.isControllingCamera = not self.isControllingCamera
+    elseif key == 'q' then
+        local next = not self.scene.debugPhysics
+        self.scene.debugPhysics = next
+        self.player.debug = next
     end
     self.input._scrollDelta = y
 end

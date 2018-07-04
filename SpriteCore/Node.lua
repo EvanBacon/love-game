@@ -24,6 +24,8 @@ function Node:initialize(props)
     self.rotation = 0
     self.flipH = false
     self.flipV = false
+    self.debugPhysics = props.debugPhysics
+    self.debug = props.debug
 end
 
 function Node:getAbsolutePosition()

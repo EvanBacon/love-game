@@ -37,6 +37,7 @@ end
 function drawDebugData()
     love.graphics.setColor(0, 0, 0)
     love.graphics.print('Current  FPS: ' .. tostring(love.timer.getFPS()), 20, 30)
+    love.graphics.print('Toggle Camera: e, Toggle physics: q', 20, 50)
     -- love.graphics.print(layer.hero.position:__tostring(), 20, 50)
     love.graphics.setColor(255, 255, 255)
 end
@@ -70,8 +71,6 @@ function setupGame()
         }
     )
     game:setTilemap(tilemap)
-
-    game.scene.debug = true
 end
 
 function testStuff()
@@ -88,7 +87,6 @@ function testStuff()
     --     }
     --     sprite:addAnimation(animation, animationKey)
     --     sprite.currentAnimation = animationKey
-    --     sprite.debug = true
     --     game.scene:addChild(sprite)
     --     return sprite
     -- end
