@@ -17,6 +17,7 @@ function Sprite:initialize(props)
 end
 
 function Sprite:addAnimation(animation, key)
+    key = key or animation.name
     self.animations[key or #self.animations + 1] = animation
     animation:update(0)
     if not self.currentAnimation then

@@ -31,10 +31,7 @@ function Game:setTilemap(tilemap)
     self:buildCamera(self.input, self.tilemap)
     if self.playerData then
         self:setPlayer(Player:new(self.playerData))
-        self.player.width = 13
-        self.player.height = 29
         self.player.debug = true
-        -- self.player.position:setMuted(-10, 0)
         self.camera:renderWithRelativePosition(0.5, 0.8)
     end
 end
