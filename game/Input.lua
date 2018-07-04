@@ -1,7 +1,9 @@
-local class = require "libs.middleclass"
-local Input = class("Input")
 local Vector2 = Vector2
 local love = love
+
+local class = require "libs/middleclass"
+
+local Input = class("Input")
 
 function Input:initialize()
     self._delta = Vector2:new(0, 0)

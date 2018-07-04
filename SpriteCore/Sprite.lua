@@ -1,4 +1,4 @@
-local class = require "libs.middleclass"
+local class = require "libs/middleclass"
 local love = love
 local Container = require "SpriteCore.Container"
 --[[

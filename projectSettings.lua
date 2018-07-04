@@ -1,4 +1,4 @@
-local json = require "libs.json"
+local json = require "libs/json"
 
 function parseConfig()
     local filename = "config.json"

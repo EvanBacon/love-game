@@ -1,4 +1,4 @@
-local class = require "libs.middleclass"
+local class = require "libs/middleclass"
 local Dynamic = class("Dynamic")
 
 function Dynamic:initialize(example_map_path)

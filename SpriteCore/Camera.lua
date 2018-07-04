@@ -1,4 +1,4 @@
-local class = require "libs.middleclass"
+local class = require "libs/middleclass"
 local Vector2 = require "math/Vector2"
 
 local Camera = class("Camera")
