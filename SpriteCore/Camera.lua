@@ -1,3 +1,4 @@
+local love = love
 local class = require "libs/middleclass"
 local Vector2 = require "math/Vector2"
 

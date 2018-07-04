@@ -66,4 +66,11 @@ function Player:updateInput(dt)
     end
 end
 
+function Player:setWorld(world, width, height, type)
+    self.world = world
+    self.body = love.physics.newBody(world, self.position.x, self.position.y, type)
+    self.shape = love.physics.newCircleShape(height / 2) --make a rectangle with a width of 650 and a height of 50
+    self.fixture = love.physics.newFixture(self.body, self.shape) --attach shape to body
+end
+
 return Player
