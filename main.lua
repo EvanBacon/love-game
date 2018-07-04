@@ -1,21 +1,27 @@
 local love = love
 require "utils/imlearnding"
-class = require "libs.middleclass"
-anim8 = require "libs.anim8"
-List = require "src.List"
-Vector2 = require "math/Vector2"
-Game = require "src.Game"
-Container = require "src.Container"
-Sprite = require "src.Sprite"
-Player = require "src.Player"
-Input = require "src/Input"
+
+class = require "libs/middleclass"
+anim8 = require "libs/anim8"
+local setupScreen = require "utils/setupScreen"
+
+List = require "utils/List"
 uuid = require "utils/uuid"
 
+Vector2 = require "math/Vector2"
+
+SpriteCore = require "SpriteCore"
+
+local Game = SpriteCore.Game
+local Tilemap = SpriteCore.Tilemap
+Container = SpriteCore.Container
+Sprite = SpriteCore.Sprite
+
+local Input = require "game/Input"
+
 local projectSettings = require "projectSettings"
-local Tilemap = require "src/Tilemap"
 
 function love.load()
-    local setupScreen = require "utils/setupScreen"
     setupScreen()
     setupGame()
     testStuff()

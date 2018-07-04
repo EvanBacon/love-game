@@ -1,7 +1,7 @@
 local class = require "libs.middleclass"
 local love = love
 
-local Container = require "src/Container"
+local Container = require "SpriteCore/Container"
 local Scene = class("Scene", Container)
 
 function Scene:initialize(props)

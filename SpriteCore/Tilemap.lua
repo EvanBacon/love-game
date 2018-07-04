@@ -1,7 +1,6 @@
 local class = require "libs.middleclass"
 local sti = require "libs.sti.sti"
 local Dynamic = require "maps.dynamic"
-local Vector2 = require "math/Vector2"
 
 local Tilemap = class "Tilemap"
 

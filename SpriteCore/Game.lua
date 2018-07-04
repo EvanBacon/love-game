@@ -1,9 +1,13 @@
 local love = love
-local class = require "libs.middleclass"
-local Scene = require "src/Scene"
 
+local class = require "libs/middleclass"
 local push = require "libs/push"
-local Camera = require "src/Camera"
+
+local Scene = require "SpriteCore/Scene"
+local Camera = require "SpriteCore/Camera"
+--todo abstract
+local Player = require "game/Player"
+
 local Game = class "Game"
 
 function Game:initialize(props)

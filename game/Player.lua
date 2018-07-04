@@ -1,6 +1,6 @@
-local class = require "libs.middleclass"
-local Sprite = require "src.Sprite"
 local love = love
+local class = require "libs/middleclass"
+local Sprite = require "SpriteCore/Sprite"
 
 local images = {
     side = love.graphics.newImage("assets/characters/character1.png"),
