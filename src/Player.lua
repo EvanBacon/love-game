@@ -1,4 +1,5 @@
-local class = class
+local class = require "libs.middleclass"
+local Sprite = require "src.Sprite"
 local love = love
 
 local images = {
@@ -6,6 +7,7 @@ local images = {
     front = love.graphics.newImage("assets/characters/character2.png"),
     back = love.graphics.newImage("assets/characters/character3.png")
 }
+
 local function generateAnimation(image, width, height, key)
     local g = anim8.newGrid(width, height, image:getWidth(), image:getHeight())
     local animation = anim8.newAnimation(g("1-4", 1), 0.1)
@@ -45,7 +47,7 @@ function Player:initialize(props)
     self.body:setLinearDamping(12)
     self.body:setFixedRotation(true)
 
-    self.speed = 300 * 100
+    self.speed = 300000
 end
 
 function Player:setDirection(direction)

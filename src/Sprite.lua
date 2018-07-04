@@ -1,4 +1,4 @@
-local class = class
+local class = require "libs.middleclass"
 local love = love
 
 --[[

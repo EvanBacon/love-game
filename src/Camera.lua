@@ -1,3 +1,4 @@
+local class = require "libs.middleclass"
 local Camera = class("Camera")
 local Vector2 = require "src.Vector"
 

@@ -1,3 +1,4 @@
+local class = require "libs.middleclass"
 local Input = class("Input")
 local Vector2 = Vector
 local love = love

@@ -1,3 +1,4 @@
+local class = require "libs.middleclass"
 local sti = require "libs.sti.sti"
 local Dynamic = require "maps.dynamic"
 local Point = require "src.Vector"
@@ -43,7 +44,6 @@ function Tilemap:load(config)
 
     local spawn = self.map.layers["spawn"]
 
-    console.log("has", self.map.layers)
     if spawn and spawn.objects then
         local spawnPoint = nil
         if spawn ~= nil then
@@ -58,7 +58,6 @@ function Tilemap:load(config)
                 -- end
             end
         end
-        console.log("spawn point", spawnPoint)
     end
 
     -- food layer

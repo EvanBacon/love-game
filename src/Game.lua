@@ -1,5 +1,5 @@
 local love = love
-local class = class
+local class = require "libs.middleclass"
 local Scene = require "src/Scene"
 
 local push = require "libs/push"
@@ -46,7 +46,7 @@ end
 
 function Game:setPlayer(player)
     self.player = player
-    console.log("add player", self.player.position.x)
+    print("add player", self.player.position.x)
 
     self.scene:addChild(player)
 end

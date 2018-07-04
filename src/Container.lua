@@ -1,7 +1,6 @@
 local love = love
 local Vector = Vector
-local class = class
-
+local class = require "libs.middleclass"
 local Container = class("Container")
 
 function Container:initialize(props)
