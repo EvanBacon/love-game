@@ -33,6 +33,9 @@ function Camera:update(dt)
     if game.isControllingCamera then
         local delta = self.input:getCameraMovement()
         self:move(delta.x * dt * self.movementSpeed, delta.y * dt * self.movementSpeed)
+    else
+        self.x = game.player.position.x - self.viewportWidth / 2
+        self.y = game.player.position.y - self.viewportHeight / 2
     end
 end
 
