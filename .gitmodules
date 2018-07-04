@@ -1,12 +1,3 @@
-[submodule "Moan"]
-	path = libs/Moan
-	url = https://github.com/twentytwoo/Moan.lua.git
 [submodule "libs/sti"]
 	path = libs/sti
 	url = git@github.com:EvanBacon/Simple-Tiled-Implementation.git
-[submodule "libs/gamera"]
-	path = libs/gamera
-	url = git@github.com:kikito/gamera.git
-[submodule "libs/rotLove"]
-	path = libs/rotLove
-	url = git@github.com:paulofmandown/rotLove.git

@@ -1,16 +1,19 @@
-function controls(x, y, speed, delta)
+local xt = 0
+local xy = 0
+
+function controls(speed, delta)
+    local x = 0
+    local y = 0
     if allowMove == true then
         if not tactil then
             if love.keyboard.isDown("right") then
                 layer.hero.moving = true
-                layer.hero.escala = 1
-                layer.hero.offset = 0
+                layer.hero.flipH = false
                 x = x + speed
             elseif love.keyboard.isDown("left") then
                 x = x - speed
                 layer.hero.moving = true
-                layer.hero.escala = -1
-                layer.hero.offset = 12
+                layer.hero.flipH = true
             end
             if love.keyboard.isDown("down") then
                 layer.hero.moving = true
@@ -21,39 +24,34 @@ function controls(x, y, speed, delta)
             end
             if x == 0 then
                 if y > 0 then
-                    herofacing = "down"
+                    player.direction = "down"
                 elseif y < 0 then
-                    herofacing = "top"
+                    player.direction = "top"
                 end
             else
                 if x > 0 then
-                    herofacing = "right"
+                    player.direction = "right"
                 elseif x < 0 then
-                    herofacing = "left"
+                    player.direction = "left"
                 end
             end
         else
             x = (xt - love.graphics.getWidth() / 2)
             y = (yt - love.graphics.getHeight() / 2)
             layer.hero.moving = true
-            if x < 0 then
-                layer.hero.escala = -1
-                layer.hero.offset = 12
-            else
-                layer.hero.escala = 1
-                layer.hero.offset = 0
-            end
+            layer.hero.flipH = x < 0
+
             if math.abs(x) < 50 then
                 if y > 0 then
-                    herofacing = "down"
+                    player.direction = "down"
                 elseif y < 0 then
-                    herofacing = "top"
+                    player.direction = "top"
                 end
             else
                 if x > 0 then
-                    herofacing = "right"
+                    player.direction = "right"
                 elseif x < 0 then
-                    herofacing = "left"
+                    player.direction = "left"
                 end
             end
             if (x > 200) then
