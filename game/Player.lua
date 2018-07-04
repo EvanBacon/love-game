@@ -1,22 +1,22 @@
 local love = love
-local class = require "libs/middleclass"
-local Sprite = require "SpriteCore/Sprite"
+local class = require 'libs/middleclass'
+local Sprite = require 'SpriteCore/Sprite'
 
 local images = {
-    side = love.graphics.newImage("assets/characters/character1.png"),
-    front = love.graphics.newImage("assets/characters/character2.png"),
-    back = love.graphics.newImage("assets/characters/character3.png")
+    side = love.graphics.newImage('assets/characters/character1.png'),
+    back = love.graphics.newImage('assets/characters/character2.png'),
+    front = love.graphics.newImage('assets/characters/character3.png')
 }
 
 local function generateAnimation(image, width, height, key)
     local g = anim8.newGrid(width, height, image:getWidth(), image:getHeight())
-    local animation = anim8.newAnimation(g("1-4", 1), 0.1)
+    local animation = anim8.newAnimation(g('1-4', 1), 0.1)
     animation.image = image
     animation.name = key
     return animation
 end
 
-local Player = class("Player", Sprite)
+local Player = class('Player', Sprite)
 
 function Player:initialize(props)
     props = props or {}
@@ -25,9 +25,9 @@ function Player:initialize(props)
     self.width = 14
     self.height = 21
 
-    local sideAnimation = generateAnimation(images.side, 14, 21, "side")
-    local frontAnimation = generateAnimation(images.front, 14, 21, "front")
-    local backAnimation = generateAnimation(images.back, 15, 21, "back")
+    local sideAnimation = generateAnimation(images.side, 14, 21, 'side')
+    local frontAnimation = generateAnimation(images.front, 15, 21, 'front')
+    local backAnimation = generateAnimation(images.back, 14, 21, 'back')
 
     self:addAnimation(sideAnimation)
     self:addAnimation(frontAnimation)
@@ -35,7 +35,7 @@ function Player:initialize(props)
 
     self.scale.x = 2
     self.scale.y = 2
-    self:setDirection("down")
+    self:setDirection('down')
     self.moving = true
 
     local scaledWidth = self.width * self.scale.x
@@ -43,7 +43,7 @@ function Player:initialize(props)
     local boundingWidth = (scaledWidth * 0.7)
     local boundingHeight = (scaledHeight * 0.7)
     self.physicsOffset = Vector2(scaledWidth * -0.5, scaledHeight * -0.5)
-    self:enablePhysics(boundingWidth, boundingHeight, "dynamic")
+    self:enablePhysics(boundingWidth, boundingHeight, 'dynamic')
     self.body:setLinearDamping(12)
     self.body:setFixedRotation(true)
 
@@ -51,18 +51,30 @@ function Player:initialize(props)
 end
 
 function Player:setDirection(direction)
-    if self.direction == "left" or self.direction == "right" then
-        self.currentAnimation = "side"
-    elseif self.direction == "up" then
-        self.currentAnimation = "front"
+    if self.direction == 'left' or self.direction == 'right' then
+        self.currentAnimation = 'side'
+    elseif self.direction == 'up' then
+        self.currentAnimation = 'front'
     else
-        self.currentAnimation = "back"
+        self.currentAnimation = 'back'
     end
 end
 
 function Player:updateInput(dt)
     if not game.isControllingCamera then
         Sprite.updateInput(self, dt)
+
+        if love.keyboard.isDown('d') then
+            self.currentAnimation = 'side'
+            self.animations['side'].flippedH = false
+        elseif love.keyboard.isDown('a') then
+            self.currentAnimation = 'side'
+            self.animations['side'].flippedH = true
+        elseif love.keyboard.isDown('w') then
+            self.currentAnimation = 'back'
+        elseif love.keyboard.isDown('s') then
+            self.currentAnimation = 'front'
+        end
     end
 end
 

@@ -48,12 +48,15 @@ function Sprite:update(dt)
     if self.moving then
         -- maybe just update one animation
         for _, animation in pairs(self.animations) do
+            animation:resume()
             animation:update(dt)
         end
     else
-        for _, animation in pairs(self.animations) do
-            -- animation:reset()
-        end
+        -- for _, animation in pairs(self.animations) do
+        --     animation:gotoFrame(0)
+        -- end
+        local animation = self:getCurrentAnimation()
+        animation:pauseAtStart()
     end
 
     if self.body then
@@ -66,6 +69,7 @@ end
 function Sprite:updateInput(dt)
     if self.input then
         local delta = self.input:getCameraMovement()
+        self.moving = delta.x ~= 0 or delta.y ~= 0
         self:move(delta.x * dt * self.speed, delta.y * dt * self.speed)
     end
 end
