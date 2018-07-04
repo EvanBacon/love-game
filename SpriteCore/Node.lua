@@ -1,11 +1,11 @@
 local love = love
 local Vector2 = Vector2
-local class = require "libs/middleclass"
-local Container = class("Container")
-local List = require "utils/List"
-local uuid = require "utils/uuid"
+local class = require 'libs/middleclass'
+local Node = class('Node')
+local List = require 'utils/List'
+local uuid = require 'utils/uuid'
 
-function Container:initialize(props)
+function Node:initialize(props)
     props = props or {}
     self.__key = uuid()
     self.width = props.width or 0
@@ -26,7 +26,7 @@ function Container:initialize(props)
     self.flipV = false
 end
 
-function Container:getAbsolutePosition()
+function Node:getAbsolutePosition()
     if self.parent then
         return self.parent:getAbsolutePosition() + self.position
     else
@@ -34,7 +34,7 @@ function Container:getAbsolutePosition()
     end
 end
 
-function Container:getAbsoluteScale()
+function Node:getAbsoluteScale()
     if self.parent then
         local scale = self.parent:getAbsoluteScale()
         return Vector2(scale.x * self.scale.x, scale.y * self.scale.y)
@@ -43,7 +43,7 @@ function Container:getAbsoluteScale()
     end
 end
 
-function Container:preDraw(dt)
+function Node:preDraw(dt)
     love.graphics.push() -- stores the default coordinate system
 
     local translateX = self.position.x
@@ -69,7 +69,7 @@ function Container:preDraw(dt)
     love.graphics.scale(scaleX, scaleY)
 end
 
-function Container:draw(dt)
+function Node:draw(dt)
     -- use the new coordinate system to draw the viewed scene
     self.children:forEach(
         function(child)
@@ -85,23 +85,23 @@ function Container:draw(dt)
     self:drawDebug(dt)
 end
 
-function Container:drawDebug(dt)
+function Node:drawDebug(dt)
     if self.debug then
-        love.graphics.rectangle("line", 0, 0, self.width, self.height)
+        love.graphics.rectangle('line', 0, 0, self.width, self.height)
     end
 end
 
-function Container:fullDraw(dt)
+function Node:fullDraw(dt)
     self:preDraw(dt)
     self:draw(dt)
     self:postDraw(dt)
 end
 
-function Container:postDraw(dt)
+function Node:postDraw(dt)
     love.graphics.pop()
 end
 
-function Container:update(dt)
+function Node:update(dt)
     self.children:forEach(
         function(child, index)
             child:update(dt)
@@ -109,17 +109,17 @@ function Container:update(dt)
     )
 end
 
-function Container:addChild(child, index)
+function Node:addChild(child, index)
     child.parent = self
     self.children:add(child, index or child.__key)
 end
 
-function Container:removeChild(child)
+function Node:removeChild(child)
     child.parent = nil
     self.children:remove(child.__key)
 end
 
-function Container:removeAllChildren()
+function Node:removeAllChildren()
     self.children:forEach(
         function(child)
             child.parent = nil
@@ -128,4 +128,4 @@ function Container:removeAllChildren()
     self.children = List()
 end
 
-return Container
+return Node

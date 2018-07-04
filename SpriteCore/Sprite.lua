@@ -1,15 +1,15 @@
 local class = require 'libs/middleclass'
 local love = love
-local Container = require 'SpriteCore.Container'
+local Node = require 'SpriteCore.Node'
 --[[
 body.setType()
 body.getType()
 --]]
-local Sprite = class('Sprite', Container)
+local Sprite = class('Sprite', Node)
 
 function Sprite:initialize(props)
     props = props or {}
-    Container.initialize(self, props)
+    Node.initialize(self, props)
     self.input = props.input
     self.bodyType = props.bodyType
     self.animations = {}
@@ -44,7 +44,7 @@ function Sprite:move(dx, dy)
 end
 
 function Sprite:update(dt)
-    Container.update(self, dt)
+    Node.update(self, dt)
     if self.moving then
         -- maybe just update one animation
         for _, animation in pairs(self.animations) do
@@ -77,7 +77,7 @@ function Sprite:getCurrentAnimation()
 end
 
 function Sprite:draw(dt)
-    Container.draw(self, dt)
+    Node.draw(self, dt)
     local animation = self:getCurrentAnimation()
     if animation then
         animation:draw(animation.image, 0, 0, self.rotation, 1, 1, 0, 0)

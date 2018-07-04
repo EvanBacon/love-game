@@ -1,5 +1,5 @@
 local exports = {
-    'Container',
+    'Node',
     'Scene',
     'Tilemap',
     'Camera',

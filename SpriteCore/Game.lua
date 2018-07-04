@@ -73,7 +73,6 @@ function Game:wheelmoved(x, y)
 end
 
 function Game:keypressed(key)
-    print(key)
     if key == 'escape' or key == 'c' then
         love.event.quit()
     elseif key == 'e' then

@@ -1,17 +1,17 @@
 local class = require 'libs/middleclass'
 local love = love
 
-local Container = require 'SpriteCore/Container'
-local Scene = class('Scene', Container)
+local Node = require 'SpriteCore/Node'
+local Scene = class('Scene', Node)
 
 function Scene:initialize(props)
     props = props or {}
-    Container.initialize(self, props)
+    Node.initialize(self, props)
     self.debugPhysics = true
 end
 
 function Scene:draw(dt)
-    Container.draw(self, dt)
+    Node.draw(self, dt)
     if self.debugPhysics then
         love.graphics.push('all')
         love.graphics.setColor(0, 1, 0)

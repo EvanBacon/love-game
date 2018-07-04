@@ -14,12 +14,10 @@ SpriteCore = require 'SpriteCore'
 
 local Game = SpriteCore.Game
 local Tilemap = SpriteCore.Tilemap
-Container = SpriteCore.Container
+Node = SpriteCore.Node
 Sprite = SpriteCore.Sprite
 
 local Input = require 'game/Input'
-
-local projectSettings = require 'projectSettings'
 
 function love.load()
     setupScreen()
@@ -52,7 +50,7 @@ function love.wheelmoved(x, y)
 end
 
 function setupGame()
-    local config = projectSettings()
+    local config = require 'gameConfig'
 
     local input = Input:new()
 

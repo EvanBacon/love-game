@@ -9,7 +9,6 @@ function setupScreen()
     local gameWidth = windowWidth * 0.9
     local gameHeight = windowHeight * 0.9
 
-    print('setupScreen')
     push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false})
 
     love.graphics.setDefaultFilter('nearest', 'nearest')
