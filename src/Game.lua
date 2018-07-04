@@ -1,21 +1,22 @@
 local love = love
 local class = class
+local Scene = require "src/Scene"
 
 local push = require "libs/push"
 local Camera = require "src/Camera"
-local Container = require "src/Container"
 local Game = class "Game"
 
 function Game:initialize(props)
     props = props or {}
     if props.sceneProps then
-        self.scene = Container:new(props.sceneProps)
+        self.scene = Scene:new(props.sceneProps)
     elseif props.scene then
         self.scene = props.scene
     else
-        self.scene = Container:new()
+        self.scene = Scene:new()
     end
 
+    self.debugPhysics = true
     self.isControllingCamera = false
     self.input = props.input
 

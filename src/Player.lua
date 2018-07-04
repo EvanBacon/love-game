@@ -31,16 +31,21 @@ function Player:initialize(props)
     self:addAnimation(frontAnimation)
     self:addAnimation(backAnimation)
 
-    self.scale.x = 5
-    self.scale.y = 5
+    self.scale.x = 2
+    self.scale.y = 2
     self:setDirection("down")
     self.moving = true
 
-    self:enablePhysics(self.width * 0.7, self.height * 0.7, "dynamic")
+    local scaledWidth = self.width * self.scale.x
+    local scaledHeight = self.height * self.scale.y
+    local boundingWidth = (scaledWidth * 0.7)
+    local boundingHeight = (scaledHeight * 0.7)
+    self.physicsOffset = Vector(scaledWidth * -0.5, scaledHeight * -0.5)
+    self:enablePhysics(boundingWidth, boundingHeight, "dynamic")
     self.body:setLinearDamping(12)
     self.body:setFixedRotation(true)
 
-    self.speed = 250 * 100
+    self.speed = 300 * 100
 end
 
 function Player:setDirection(direction)

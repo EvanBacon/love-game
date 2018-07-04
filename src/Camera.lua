@@ -12,6 +12,7 @@ function Camera:initialize(inputManager, map)
     self.input = inputManager
     self.x = 0
     self.y = 0
+    self.debugPhysics = false
 end
 
 function Camera:move(x, y)
@@ -42,6 +43,12 @@ function Camera:draw()
     self.y = y
     self.map.map:draw(-x, -y)
     game.scene.position:setMuted(-x, -y)
+    if self.debugPhysics then
+        love.graphics.push("all")
+        love.graphics.setColor(255, 0, 0)
+        self.map.map:box2d_draw()
+        love.graphics.pop()
+    end
 end
 
 function Camera:clampPoint(x, y)
