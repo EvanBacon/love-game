@@ -3,7 +3,7 @@ require "utils/imlearnding"
 class = require "libs.middleclass"
 anim8 = require "libs.anim8"
 List = require "src.List"
-Vector = require "src.Vector"
+Vector2 = require "src.Vector2"
 Game = require "src.Game"
 Container = require "src.Container"
 Sprite = require "src.Sprite"
@@ -78,7 +78,7 @@ function testStuff()
     --     animation.image = image
     --     local sprite =
     --         Sprite:new {
-    --         position = Vector(props.x, props.y),
+    --         position = Vector2(props.x, props.y),
     --         width = props.width,
     --         height = props.height
     --     }

@@ -42,7 +42,7 @@ function Player:initialize(props)
     local scaledHeight = self.height * self.scale.y
     local boundingWidth = (scaledWidth * 0.7)
     local boundingHeight = (scaledHeight * 0.7)
-    self.physicsOffset = Vector(scaledWidth * -0.5, scaledHeight * -0.5)
+    self.physicsOffset = Vector2(scaledWidth * -0.5, scaledHeight * -0.5)
     self:enablePhysics(boundingWidth, boundingHeight, "dynamic")
     self.body:setLinearDamping(12)
     self.body:setFixedRotation(true)

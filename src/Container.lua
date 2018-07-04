@@ -1,5 +1,5 @@
 local love = love
-local Vector = Vector
+local Vector2 = Vector2
 local class = require "libs.middleclass"
 local Container = class("Container")
 
@@ -8,17 +8,17 @@ function Container:initialize(props)
     self.__key = uuid()
     self.width = props.width or 0
     self.height = props.height or 0
-    self.position = props.position or Vector()
+    self.position = props.position or Vector2()
 
     if props.x or props.y then
-        self.position = Vector(props.x or 0, props.y or 0)
+        self.position = Vector2(props.x or 0, props.y or 0)
     else
-        self.position = props.position or Vector()
+        self.position = props.position or Vector2()
     end
 
     self.children = List()
-    self.scale = Vector(1, 1)
-    self.physicsOffset = Vector()
+    self.scale = Vector2(1, 1)
+    self.physicsOffset = Vector2()
     self.rotation = 0
     self.flipH = false
     self.flipV = false
@@ -35,7 +35,7 @@ end
 function Container:getAbsoluteScale()
     if self.parent then
         local scale = self.parent:getAbsoluteScale()
-        return Vector(scale.x * self.scale.x, scale.y * self.scale.y)
+        return Vector2(scale.x * self.scale.x, scale.y * self.scale.y)
     else
         return self.scale
     end
