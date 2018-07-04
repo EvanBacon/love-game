@@ -7,9 +7,10 @@ Playing with löve2d stuff
 ### General
 
 1.  No using `_G` for globals. ex: ✅ `local love = love` ❌ `local love = _G.love`
-2.  Single quotes
-3.  Camel case naming for variables. ex: ✅ `local sofaKing = {}` ❌ `local sofaking = {}`
-4.  Classes start with a capital letter. ex: ✅ `local Player = class('Player')` ❌ `local player = class('player')`
+2.  Declare globals locally at the top of the file. ex: `local love = love`
+3.  Single quotes
+4.  Camel case naming for variables. ex: ✅ `local sofaKing = {}` ❌ `local sofaking = {}`
+5.  Classes start with a capital letter. ex: ✅ `local Player = class('Player')` ❌ `local player = class('player')`
 
 ### Imports:
 
