@@ -1,6 +1,6 @@
 local class = require 'libs/middleclass'
 local sti = require 'libs/sti/sti'
-local Dynamic = require 'maps/dynamic'
+local Dynamic = require 'maps/Dynamic'
 
 local Tilemap = class 'Tilemap'
 
