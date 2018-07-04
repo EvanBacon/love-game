@@ -1,8 +1,8 @@
 local love = love
-local class = require "libs/middleclass"
-local Vector2 = require "math/Vector2"
+local class = require 'libs/middleclass'
+local Vector2 = require 'math/Vector2'
 
-local Camera = class("Camera")
+local Camera = class('Camera')
 
 function Camera:initialize(inputManager, map)
     self.viewportWidth = love.graphics.getWidth()
@@ -50,7 +50,7 @@ function Camera:draw()
     self.map.map:draw(-x, -y)
     game.scene.position:setMuted(-x, -y)
     if self.debugPhysics then
-        love.graphics.push("all")
+        love.graphics.push('all')
         love.graphics.setColor(255, 0, 0)
         self.map.map:box2d_draw()
         love.graphics.pop()

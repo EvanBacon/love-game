@@ -1,14 +1,14 @@
 local love = love
 
-local class = require "libs/middleclass"
-local push = require "libs/push"
+local class = require 'libs/middleclass'
+local push = require 'libs/push'
 
-local Scene = require "SpriteCore/Scene"
-local Camera = require "SpriteCore/Camera"
+local Scene = require 'SpriteCore/Scene'
+local Camera = require 'SpriteCore/Camera'
 --todo abstract
-local Player = require "game/Player"
+local Player = require 'game/Player'
 
-local Game = class "Game"
+local Game = class 'Game'
 
 function Game:initialize(props)
     props = props or {}
@@ -24,7 +24,7 @@ function Game:initialize(props)
     self.isControllingCamera = false
     self.input = props.input
 
-    assert(self.input, "Error: Game: need props.input")
+    assert(self.input, 'Error: Game: need props.input')
 
     love.physics.setMeter(16)
     self.world = love.physics.newWorld(0, 0)
@@ -50,7 +50,7 @@ end
 
 function Game:setPlayer(player)
     self.player = player
-    print("add player", self.player.position.x)
+    print('add player', self.player.position.x)
 
     self.scene:addChild(player)
 end
@@ -74,9 +74,9 @@ end
 
 function Game:keypressed(key)
     print(key)
-    if key == "escape" or key == "c" then
+    if key == 'escape' or key == 'c' then
         love.event.quit()
-    elseif key == "e" then
+    elseif key == 'e' then
         self.isControllingCamera = not self.isControllingCamera
     end
     self.input._scrollDelta = y

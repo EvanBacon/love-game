@@ -1,4 +1,4 @@
-local push = require "libs/push"
+local push = require 'libs/push'
 
 function setupScreen()
     local windowWidth, windowHeight = love.window.getDesktopDimensions()
@@ -9,10 +9,10 @@ function setupScreen()
     local gameWidth = windowWidth * 0.9
     local gameHeight = windowHeight * 0.9
 
-    print("setupScreen")
+    print('setupScreen')
     push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {fullscreen = false})
 
-    love.graphics.setDefaultFilter("nearest", "nearest")
+    love.graphics.setDefaultFilter('nearest', 'nearest')
 end
 
 return setupScreen

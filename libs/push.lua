@@ -20,7 +20,7 @@ setmetatable(push, push)
 
 function push:applySettings(settings)
     for k, v in pairs(settings) do
-        self["_" .. k] = v
+        self['_' .. k] = v
     end
 end
 
@@ -50,21 +50,21 @@ function push:setupScreen(WWIDTH, WHEIGHT, RWIDTH, RHEIGHT, settings)
     self:initValues()
 
     if self._canvas then
-        self:setupCanvas({"default"}) --setup canvas
+        self:setupCanvas({'default'}) --setup canvas
     end
 
     self._borderColor = {0, 0, 0}
 
     self._drawFunctions = {
-        ["start"] = self.start,
-        ["end"] = self.finish
+        ['start'] = self.start,
+        ['end'] = self.finish
     }
 
     return self
 end
 
 function push:setupCanvas(canvases)
-    table.insert(canvases, {name = "_render", private = true}) --final render
+    table.insert(canvases, {name = '_render', private = true}) --final render
 
     self._canvas = true
     self.canvases = {}
@@ -102,7 +102,7 @@ function push:getCanvasTable(name)
 end
 function push:setShader(name, shader)
     if not shader then
-        self:getCanvasTable("_render").shader = name
+        self:getCanvasTable('_render').shader = name
     else
         self:getCanvasTable(name).shader = shader
     end
@@ -168,10 +168,10 @@ function push:applyShaders(canvas, shaders)
     else
         local _canvas = love.graphics.getCanvas()
 
-        local _tmp = self:getCanvasTable("_tmp")
+        local _tmp = self:getCanvasTable('_tmp')
         if not _tmp then --create temp canvas only if needed
-            self:addCanvas({name = "_tmp", private = true, shader = nil})
-            _tmp = self:getCanvasTable("_tmp")
+            self:addCanvas({name = '_tmp', private = true, shader = nil})
+            _tmp = self:getCanvasTable('_tmp')
         end
 
         love.graphics.push()
@@ -197,7 +197,7 @@ end
 function push:finish(shader)
     love.graphics.setBackgroundColor(unpack(self._borderColor))
     if self._canvas then
-        local _render = self:getCanvasTable("_render")
+        local _render = self:getCanvasTable('_render')
 
         love.graphics.pop()
 
@@ -211,7 +211,7 @@ function push:finish(shader)
             if not _table.private then
                 local _canvas = _table.canvas
                 local _shader = _table.shader
-                self:applyShaders(_canvas, type(_shader) == "table" and _shader or {_shader})
+                self:applyShaders(_canvas, type(_shader) == 'table' and _shader or {_shader})
             end
         end
         love.graphics.setCanvas()
@@ -221,7 +221,7 @@ function push:finish(shader)
         local shader = shader or _render.shader
         love.graphics.push()
         love.graphics.scale(self._SCALE.x, self._SCALE.y)
-        self:applyShaders(_render.canvas, type(shader) == "table" and shader or {shader})
+        self:applyShaders(_render.canvas, type(shader) == 'table' and shader or {shader})
         love.graphics.pop()
 
         --clear canvas
@@ -272,7 +272,7 @@ function push:switchFullscreen(winw, winh)
 
     self:initValues()
 
-    love.window.setFullscreen(self._fullscreen, "desktop")
+    love.window.setFullscreen(self._fullscreen, 'desktop')
     if not self._fullscreen and (winw or winh) then
         love.window.setMode(self._RWIDTH, self._RHEIGHT) --set window dimensions
     end

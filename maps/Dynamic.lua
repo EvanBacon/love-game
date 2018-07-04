@@ -1,5 +1,5 @@
-local class = require "libs/middleclass"
-local Dynamic = class("Dynamic")
+local class = require 'libs/middleclass'
+local Dynamic = class('Dynamic')
 
 function Dynamic:initialize(example_map_path)
     -- require tiled map.lua file, removing the lua portion of the substring
@@ -10,7 +10,7 @@ function Dynamic:initialize(example_map_path)
 end
 
 function Dynamic:getMap()
-    return self.mapPath .. ".lua" --self.mapTable
+    return self.mapPath .. '.lua' --self.mapTable
 end
 
 function Dynamic:randomize(layer_name)

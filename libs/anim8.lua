@@ -1,7 +1,7 @@
 local anim8 = {
-    _VERSION = "anim8 v2.3.1",
-    _DESCRIPTION = "An animation library for LÖVE",
-    _URL = "https://github.com/kikito/anim8",
+    _VERSION = 'anim8 v2.3.1',
+    _DESCRIPTION = 'An animation library for LÖVE',
+    _URL = 'https://github.com/kikito/anim8',
     _LICENSE = [[
       MIT LICENSE
       Copyright (c) 2011 Enrique García Cota
@@ -29,14 +29,14 @@ local Grid = {}
 local _frames = {}
 
 local function assertPositiveInteger(value, name)
-    if type(value) ~= "number" then
-        error(("%s should be a number, was %q"):format(name, tostring(value)))
+    if type(value) ~= 'number' then
+        error(('%s should be a number, was %q'):format(name, tostring(value)))
     end
     if value < 1 then
-        error(("%s should be a positive number, was %d"):format(name, value))
+        error(('%s should be a positive number, was %d'):format(name, value))
     end
     if value ~= math.floor(value) then
-        error(("%s should be an integer, was %d"):format(name, value))
+        error(('%s should be an integer, was %d'):format(name, value))
     end
 end
 
@@ -53,12 +53,12 @@ local function createFrame(self, x, y)
 end
 
 local function getGridKey(...)
-    return table.concat({...}, "-")
+    return table.concat({...}, '-')
 end
 
 local function getOrCreateFrame(self, x, y)
     if x < 1 or x > self.width or y < 1 or y > self.height then
-        error(("There is no frame for x=%d, y=%d"):format(x, y))
+        error(('There is no frame for x=%d, y=%d'):format(x, y))
     end
     local key = self._key
     _frames[key] = _frames[key] or {}
@@ -68,12 +68,12 @@ local function getOrCreateFrame(self, x, y)
 end
 
 local function parseInterval(str)
-    if type(str) == "number" then
+    if type(str) == 'number' then
         return str, str, 1
     end
-    str = str:gsub("%s", "") -- remove spaces
-    local min, max = str:match("^(%d+)-(%d+)$")
-    assert(min and max, ("Could not parse interval from %q"):format(str))
+    str = str:gsub('%s', '') -- remove spaces
+    local min, max = str:match('^(%d+)-(%d+)$')
+    assert(min and max, ('Could not parse interval from %q'):format(str))
     min, max = tonumber(min), tonumber(max)
     local step = min <= max and 1 or -1
     return min, max, step
@@ -102,10 +102,10 @@ local Gridmt = {
 }
 
 local function newGrid(frameWidth, frameHeight, imageWidth, imageHeight, left, top, border)
-    assertPositiveInteger(frameWidth, "frameWidth")
-    assertPositiveInteger(frameHeight, "frameHeight")
-    assertPositiveInteger(imageWidth, "imageWidth")
-    assertPositiveInteger(imageHeight, "imageHeight")
+    assertPositiveInteger(frameWidth, 'frameWidth')
+    assertPositiveInteger(frameHeight, 'frameHeight')
+    assertPositiveInteger(imageWidth, 'imageWidth')
+    assertPositiveInteger(imageHeight, 'imageHeight')
 
     left = left or 0
     top = top or 0
@@ -146,14 +146,14 @@ end
 
 local function parseDurations(durations, frameCount)
     local result = {}
-    if type(durations) == "number" then
+    if type(durations) == 'number' then
         for i = 1, frameCount do
             result[i] = durations
         end
     else
         local min, max, step
         for key, duration in pairs(durations) do
-            assert(type(duration) == "number", "The value [" .. tostring(duration) .. "] should be a number")
+            assert(type(duration) == 'number', 'The value [' .. tostring(duration) .. '] should be a number')
             min, max, step = parseInterval(key)
             for i = min, max, step do
                 result[i] = duration
@@ -163,8 +163,8 @@ local function parseDurations(durations, frameCount)
 
     if #result < frameCount then
         error(
-            "The durations table has length of " ..
-                tostring(#result) .. ", but it should be >= " .. tostring(frameCount)
+            'The durations table has length of ' ..
+                tostring(#result) .. ', but it should be >= ' .. tostring(frameCount)
         )
     end
 
@@ -186,8 +186,8 @@ end
 
 local function newAnimation(frames, durations, onLoop)
     local td = type(durations)
-    if (td ~= "number" or durations <= 0) and td ~= "table" then
-        error("durations must be a positive number. Was " .. tostring(durations))
+    if (td ~= 'number' or durations <= 0) and td ~= 'table' then
+        error('durations must be a positive number. Was ' .. tostring(durations))
     end
     onLoop = onLoop or nop
     durations = parseDurations(durations, #frames)
@@ -201,7 +201,7 @@ local function newAnimation(frames, durations, onLoop)
             onLoop = onLoop,
             timer = 0,
             position = 1,
-            status = "playing",
+            status = 'playing',
             flippedH = false,
             flippedV = false
         },
@@ -243,7 +243,7 @@ local function seekFrameIndex(intervals, timer)
 end
 
 function Animation:update(dt)
-    if self.status ~= "playing" then
+    if self.status ~= 'playing' then
         return
     end
 
@@ -251,7 +251,7 @@ function Animation:update(dt)
     local loops = math.floor(self.timer / self.totalDuration)
     if loops ~= 0 then
         self.timer = self.timer - self.totalDuration * loops
-        local f = type(self.onLoop) == "function" and self.onLoop or self[self.onLoop]
+        local f = type(self.onLoop) == 'function' and self.onLoop or self[self.onLoop]
         f(self, loops)
     end
 
@@ -259,7 +259,7 @@ function Animation:update(dt)
 end
 
 function Animation:pause()
-    self.status = "paused"
+    self.status = 'paused'
 end
 
 function Animation:gotoFrame(position)
@@ -280,7 +280,7 @@ function Animation:pauseAtStart()
 end
 
 function Animation:resume()
-    self.status = "playing"
+    self.status = 'playing'
 end
 
 function Animation:draw(image, x, y, r, sx, sy, ox, oy, kx, ky)

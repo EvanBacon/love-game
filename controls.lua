@@ -6,33 +6,33 @@ function controls(speed, delta)
     local y = 0
     if allowMove == true then
         if not tactil then
-            if love.keyboard.isDown("right") then
+            if love.keyboard.isDown('right') then
                 layer.hero.moving = true
                 layer.hero.flipH = false
                 x = x + speed
-            elseif love.keyboard.isDown("left") then
+            elseif love.keyboard.isDown('left') then
                 x = x - speed
                 layer.hero.moving = true
                 layer.hero.flipH = true
             end
-            if love.keyboard.isDown("down") then
+            if love.keyboard.isDown('down') then
                 layer.hero.moving = true
                 y = y + speed
-            elseif love.keyboard.isDown("up") then
+            elseif love.keyboard.isDown('up') then
                 layer.hero.moving = true
                 y = y - speed
             end
             if x == 0 then
                 if y > 0 then
-                    player.direction = "down"
+                    player.direction = 'down'
                 elseif y < 0 then
-                    player.direction = "top"
+                    player.direction = 'top'
                 end
             else
                 if x > 0 then
-                    player.direction = "right"
+                    player.direction = 'right'
                 elseif x < 0 then
-                    player.direction = "left"
+                    player.direction = 'left'
                 end
             end
         else
@@ -43,15 +43,15 @@ function controls(speed, delta)
 
             if math.abs(x) < 50 then
                 if y > 0 then
-                    player.direction = "down"
+                    player.direction = 'down'
                 elseif y < 0 then
-                    player.direction = "top"
+                    player.direction = 'top'
                 end
             else
                 if x > 0 then
-                    player.direction = "right"
+                    player.direction = 'right'
                 elseif x < 0 then
-                    player.direction = "left"
+                    player.direction = 'left'
                 end
             end
             if (x > 200) then

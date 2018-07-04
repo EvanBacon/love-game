@@ -1,25 +1,25 @@
 local love = love
-require "utils/imlearnding"
+require 'utils/imlearnding'
 
-class = require "libs/middleclass"
-anim8 = require "libs/anim8"
-local setupScreen = require "utils/setupScreen"
+class = require 'libs/middleclass'
+anim8 = require 'libs/anim8'
+local setupScreen = require 'utils/setupScreen'
 
-List = require "utils/List"
-uuid = require "utils/uuid"
+List = require 'utils/List'
+uuid = require 'utils/uuid'
 
-Vector2 = require "math/Vector2"
+Vector2 = require 'math/Vector2'
 
-SpriteCore = require "SpriteCore"
+SpriteCore = require 'SpriteCore'
 
 local Game = SpriteCore.Game
 local Tilemap = SpriteCore.Tilemap
 Container = SpriteCore.Container
 Sprite = SpriteCore.Sprite
 
-local Input = require "game/Input"
+local Input = require 'game/Input'
 
-local projectSettings = require "projectSettings"
+local projectSettings = require 'projectSettings'
 
 function love.load()
     setupScreen()
@@ -38,7 +38,7 @@ end
 
 function drawDebugData()
     love.graphics.setColor(0, 0, 0)
-    love.graphics.print("Current  FPS: " .. tostring(love.timer.getFPS()), 20, 30)
+    love.graphics.print('Current  FPS: ' .. tostring(love.timer.getFPS()), 20, 30)
     -- love.graphics.print(layer.hero.position:__tostring(), 20, 50)
     love.graphics.setColor(255, 255, 255)
 end
@@ -67,7 +67,7 @@ function setupGame()
     tilemap:load(
         {
             world = {
-                map = "assets/maps/EmersonIsland.lua"
+                map = 'assets/maps/EmersonIsland.lua'
             }
         }
     )

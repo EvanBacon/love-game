@@ -1,11 +1,11 @@
-local class = require "libs/middleclass"
+local class = require 'libs/middleclass'
 local love = love
-local Container = require "SpriteCore.Container"
+local Container = require 'SpriteCore.Container'
 --[[
 body.setType()
 body.getType()
 --]]
-local Sprite = class("Sprite", Container)
+local Sprite = class('Sprite', Container)
 
 function Sprite:initialize(props)
     props = props or {}

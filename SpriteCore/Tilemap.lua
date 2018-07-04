@@ -1,8 +1,8 @@
-local class = require "libs/middleclass"
-local sti = require "libs/sti/sti"
-local Dynamic = require "maps/dynamic"
+local class = require 'libs/middleclass'
+local sti = require 'libs/sti/sti'
+local Dynamic = require 'maps/dynamic'
 
-local Tilemap = class "Tilemap"
+local Tilemap = class 'Tilemap'
 
 function Tilemap:initialize(being_class, config_key)
     self.being_class = being_class
@@ -11,18 +11,18 @@ end
 
 function Tilemap:load(config)
     local mapLocator = config.world.map
-    local dynamic = Dynamic:new("assets/maps/EmersonIsland") -- config.world.map
+    local dynamic = Dynamic:new('assets/maps/EmersonIsland') -- config.world.map
     -- randomize the ground layer of the map
-    dynamic:randomize("ground")
+    dynamic:randomize('ground')
 
-    self.map = sti(dynamic:getMap(), {"box2d"})
+    self.map = sti(dynamic:getMap(), {'box2d'})
     self.width = self.map.width
     self.tilewidth = self.map.tilewidth
     self.height = self.map.height
     self.tileheight = self.map.tileheight
     self.entities = {}
 
-    local walls = self.map.layers["walls"]
+    local walls = self.map.layers['walls']
     local walkTable = {}
 
     if walls ~= nil then
@@ -39,17 +39,17 @@ function Tilemap:load(config)
     end
 
     -- get our spawn location
-    self.entities["spawn"] = {}
+    self.entities['spawn'] = {}
 
-    local spawn = self.map.layers["spawn"]
+    local spawn = self.map.layers['spawn']
 
     if spawn and spawn.objects then
         local spawnPoint = nil
         if spawn ~= nil then
             for index, object in ipairs(spawn.objects) do
-                if object.type == "player" and not game.player then
+                if object.type == 'player' and not game.player then
                     game.playerData = object
-                elseif object.type == "npc" then
+                elseif object.type == 'npc' then
                 end
                 -- for x, _ in pairs(xTable) do
                 --     spawnPoint = Point:new(x, y)
@@ -60,13 +60,13 @@ function Tilemap:load(config)
     end
 
     -- food layer
-    self.entities["food"] = {}
-    local food = self.map.layers["food"]
+    self.entities['food'] = {}
+    local food = self.map.layers['food']
     if food and food.data then
         for y, xTable in pairs(food.data) do
             for x, _ in pairs(xTable) do
                 local point = Point:new(x, y)
-                table.insert(self.entities["food"], point)
+                table.insert(self.entities['food'], point)
             end
         end
     end
@@ -75,8 +75,8 @@ function Tilemap:load(config)
     self.walkTable = walkTable
 
     -- if spawnPoint ~= nil then
-    --     self.map:addCustomLayer("Beings", 5)
-    --     local beingLayer = self.map.layers["Beings"]
+    --     self.map:addCustomLayer('Beings', 5)
+    --     local beingLayer = self.map.layers['Beings']
     --     beingLayer.beings = {}
     --     local being = self.being_class:new(config[self.config_key], spawnPoint, self)
     --     table.insert(beingLayer.beings, being)

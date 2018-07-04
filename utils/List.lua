@@ -1,6 +1,6 @@
-local class = require "libs/middleclass"
+local class = require 'libs/middleclass'
 
-local List = class("List")
+local List = class('List')
 
 function List:initialize()
     self.list = {}
