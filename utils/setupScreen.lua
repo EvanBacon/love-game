@@ -1,4 +1,4 @@
-local push = require("libs.push")
+local push = require "libs.push"
 
 function setupScreen()
     local windowWidth, windowHeight = love.window.getDesktopDimensions()

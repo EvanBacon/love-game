@@ -1,5 +1,5 @@
 local Camera = class("Camera")
-local Vector2 = require("src.Vector")
+local Vector2 = require "src.Vector"
 
 function Camera:initialize(inputManager, map)
     self.viewportWidth = love.graphics.getWidth()

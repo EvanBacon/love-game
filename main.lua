@@ -13,14 +13,14 @@ function uuid()
     )
 end
 
-class = require("libs.middleclass")
-anim8 = require("libs.anim8")
-List = require("src.List")
-Vector = require("src.Vector")
-Game = require("src.Game")
-Container = require("src.Container")
-Sprite = require("src.Sprite")
-Player = require("src.Player")
+class = require "libs.middleclass"
+anim8 = require "libs.anim8"
+List = require "src.List"
+Vector = require "src.Vector"
+Game = require "src.Game"
+Container = require "src.Container"
+Sprite = require "src.Sprite"
+Player = require "src.Player"
 Input = require "src/Input"
 
 null = nil
