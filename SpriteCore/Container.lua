@@ -2,6 +2,8 @@ local love = love
 local Vector2 = Vector2
 local class = require "libs/middleclass"
 local Container = class("Container")
+local List = require "utils/List"
+local uuid = require "utils/uuid"
 
 function Container:initialize(props)
     props = props or {}
