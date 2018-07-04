@@ -1,6 +1,6 @@
-local love = _G.love
-local Vector = _G.Vector
-local class = _G.class
+local love = love
+local Vector = Vector
+local class = class
 
 local Container = class("Container")
 

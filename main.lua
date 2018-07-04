@@ -13,8 +13,8 @@ function uuid()
     )
 end
 
-class = require("libs.class")
-anim8 = require("src.anim8")
+class = require("libs.middleclass")
+anim8 = require("libs.anim8")
 List = require("src.List")
 Vector = require("src.Vector")
 Game = require("src.Game")
@@ -58,6 +58,7 @@ end
 
 function love.draw(delta)
     game:draw(delta)
+    drawDebugData()
 end
 
 function drawDebugData()
